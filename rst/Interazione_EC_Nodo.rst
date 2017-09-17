@@ -621,127 +621,72 @@ avviso\ **.**
 Gestione del singolo avviso digitale
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La componente di avvisatura “\ *push*\ ” del NodoSPC, che sovrintende
-all'inoltro degli avvisi digitali, provvede ad inoltrare il singolo
-avviso in base ai seguenti criteri:
+La componente di avvisatura “\ *push*\ ” del NodoSPC, che sovrintende all'inoltro degli avvisi digitali, provvede ad inoltrare il singolo avviso in base ai seguenti criteri:
 
-a. Canale **MAIL**: l’avviso sarà inviato in presenza di un indirizzo di
-   posta elettronica valido nel campo eMailSoggetto dell’avviso
-   digitale (cfr. Tabella 19 a pagina 99);
+a. Canale **MAIL**: l’avviso sarà inviato in presenza di un indirizzo di posta elettronica valido nel campo eMailSoggetto dell’avviso digitale (cfr. Tabella 19 a pagina 99);
 
-b. Canale **CELLULARE (SMS)**: l’avviso sarà inviato in presenza di un
-   numero di cellulare valido nel campo cellulareSoggetto (cfr.
-   Tabella 19);
+b. Canale **CELLULARE (SMS)**: l’avviso sarà inviato in presenza di un numero di cellulare valido nel campo cellulareSoggetto (cfr. Tabella 19);
 
-c. Canale **MOBILE PAYMENT**: l’avviso sarà inviato in presenza del
-   soggetto corrispondente al destinatario dell'avviso nel database
-   anagrafico [7]_ (DB Iscrizioni, vedi Figura 18), così
-   come indicato nella struttura soggettoPagatore [8]_.
+c. Canale **MOBILE PAYMENT**: l’avviso sarà inviato in presenza del soggetto corrispondente al destinatario dell'avviso nel database anagrafico [7]_ (DB Iscrizioni, vedi Figura 18), così come indicato nella struttura soggettoPagatore [8]_.
 
-Si fa presente che una richiesta di avviso può essere inviata a più
-canali. dando luogo a uno o più esiti in base ai canali utilizzati. Nel
-caso non fosse possibile identificare alcun canale per l’inoltro
-dell’avviso, il sistema fornirà un esito negativo (nessun canale
-individuato).
+Si fa presente che una richiesta di avviso può essere inviata a più canali. dando luogo a uno o più esiti in base ai canali utilizzati. Nel caso non fosse possibile identificare alcun canale per l’inoltro dell’avviso, il sistema fornirà un esito negativo (nessun canale individuato).
 
 Processo di avvisatura in modalità File Transfer
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La Figura 35 rappresenta graficamente il processo che
-prevede l'inoltro di un insieme di avvisi di pagamento attivato in
-modalità in modalità File Trasfer, dove con la dicitura mobileBackEndPSP
-si intende una piattaforma che rende raggiungibile l’utilizzatore finale
-mediante *mobile* *app* messe a disposizione dai PSP, mentre per
-*Server*\ CanaliDigitali si intende una piattaforma che consente di
-inviare all’utilizzatore finale gli avvisi tramite e-mail e SMS.
+La Figura 35 rappresenta graficamente il processo che prevede l'inoltro di un insieme di avvisi di pagamento attivato in modalità in modalità File Trasfer, dove con la dicitura mobileBackEndPSP si intende una piattaforma che rende raggiungibile l’utilizzatore finale mediante *mobile* *app* messe a disposizione dai PSP, mentre per *Server*\ CanaliDigitali si intende una piattaforma che consente di inviare all’utilizzatore finale gli avvisi tramite e-mail e SMS.
 
 |PlantUML diagram|
 
-\ **Figura 33 – *Sequence diagram* del processo di avvisatura via File
-Transfer**
+\ **Figura 33 – *Sequence diagram* del processo di avvisatura via File Transfer**
 
 Il *workflow* del processo si compone dei seguenti passi:
 
-1) la componente di *Back-end* dell’Ente Creditore predispone il flusso
-   con gli avvisi digitali secondo quanto indicato in Tabella 21 a
-   pagina 101 e ne effettua lo *upload* sulla componente *server* SFTP
-   dell'avvisatura digitale del NodoSPC;
+1) la componente di *Back-end* dell’Ente Creditore predispone il flusso con gli avvisi digitali secondo quanto indicato in Tabella 21 a pagina 101 e ne effettua lo *upload* sulla componente *server* SFTP dell'avvisatura digitale del NodoSPC;
 
-2) la componente di avvisatura del NodoSPC effettua il *download* dei
-   flussi dal *server*;
+2) la componente di avvisatura del NodoSPC effettua il *download* dei flussi dal *server*;
 
-3) la componente di avvisatura del NodoSPC elabora i file dei flussi e
-   compone i file di ACK (vedi Tabella 23 a pagina 101) per segnalare la
-   presa in carico;
+3) la componente di avvisatura del NodoSPC elabora i file dei flussi e compone i file di ACK (vedi Tabella 23 a pagina 101) per segnalare la presa in carico;
 
-4) la componente di avvisatura del NodoSPC esegue lo *upload* dei file
-   di ACK sul *server* SFTP dell’Ente Creditore;
+4) la componente di avvisatura del NodoSPC esegue lo *upload* dei file di ACK sul *server* SFTP dell’Ente Creditore;
 
-5) la componente di *Back-end* del PSP esegue il *download* dei file ACK
-   che segnalano la presa in carico da parte del NodoSPC;
+5) la componente di *Back-end* del PSP esegue il *download* dei file ACK che segnalano la presa in carico da parte del NodoSPC;
 
-Ciclo per elaborare gli avvisi digitali ricevuti all'interno di un
-flusso, sulla base dei criteri indicati al precedente paragrafo 8.2.6.1
-per la gestione del singolo avviso:
+Ciclo per elaborare gli avvisi digitali ricevuti all'interno di un flusso, sulla base dei criteri indicati al precedente paragrafo 8.2.6.1 per la gestione del singolo avviso:
 
-1) push nel caso di soddisfacimento del criterio (a), la componente di
-   avvisatura del NodoSPC invia, attraverso la primitiva
-   ***pspInviaAvvisoDigitale***, l’avviso digitale alla componente di
-   gestione *mobile* *Back-end* del PSP;
+1) push nel caso di soddisfacimento del criterio (a), la componente di avvisatura del NodoSPC invia, attraverso la primitiva ***pspInviaAvvisoDigitale***, l’avviso digitale alla componente di gestione *mobile* *Back-end* del PSP;
 
-2) la componente di gestione *mobile* *Back-end* del PSP prende in
-   carico l'avviso, per l'inoltro alla *app* dell'utilizzatore finale, e
-   fornisce conferma alla componente di avvisatura del NodoSPC;
+2) la componente di gestione *mobile* *Back-end* del PSP prende in carico l'avviso, per l'inoltro alla *app* dell'utilizzatore finale, e fornisce conferma alla componente di avvisatura del NodoSPC;
 
-3) in caso di soddisfacimento del criterio (b) o del criterio (c) o di
-   entrambi, la componente di avvisatura del NodoSPC invia l’avviso
-   digitale alla piattaforma di gestione dei canali digitali;
+3) in caso di soddisfacimento del criterio (b) o del criterio (c) o di entrambi, la componente di avvisatura del NodoSPC invia l’avviso digitale alla piattaforma di gestione dei canali digitali;
 
-4) la piattaforma di gestione dei canali digitali inoltra
-   all’utilizzatore finale sia l'avviso tramite e-mail, sia tramite SMS;
+4) la piattaforma di gestione dei canali digitali inoltra all’utilizzatore finale sia l'avviso tramite e-mail, sia tramite SMS;
 
-5) la componente di avvisatura del NodoSPC memorizza gli esiti per la
-   composizione del flusso di ritorno per l’Ente Creditore;
+5) la componente di avvisatura del NodoSPC memorizza gli esiti per la composizione del flusso di ritorno per l’Ente Creditore;
 
 Al termine dell'elaborazione del singolo flusso:
 
-1) la componente di avvisatura del NodoSPC predispone il flusso di
-   ritorno per l’Ente Creditore contenente gli esiti, componendolo
-   secondo quanto indicato in Tabella 22 a pagina 101;
+1) la componente di avvisatura del NodoSPC predispone il flusso di ritorno per l’Ente Creditore contenente gli esiti, componendolo secondo quanto indicato in Tabella 22 a pagina 101;
 
-2) la componente di avvisatura del NodoSPC esegue lo *upload* del file
-   degli esiti sul *server* SFTP dell’Ente Creditore;
+2) la componente di avvisatura del NodoSPC esegue lo *upload* del file degli esiti sul *server* SFTP dell’Ente Creditore;
 
-3) la componente di *Back-end* dell’Ente Creditore esegue il *download*
-   del file degli esiti;
+3) la componente di *Back-end* dell’Ente Creditore esegue il *download* del file degli esiti;
 
-4) la componente di *Back-end* dell’Ente Creditore elabora il file degli
-   esiti e predispone il file di ACK di ricezione esiti secondo quanto
-   indicato in Tabella 23 a pagina 101;
+4) la componente di *Back-end* dell’Ente Creditore elabora il file degli esiti e predispone il file di ACK di ricezione esiti secondo quanto indicato in Tabella 23 a pagina 101;
 
-5) la componente di *Back-end* dell’Ente Creditore esegue lo *upload*
-   del file di ACK di ricezione degli esiti;
+5) la componente di *Back-end* dell’Ente Creditore esegue lo *upload* del file di ACK di ricezione degli esiti;
 
-6) la componente di avvisatura del NodoSPC esegue il *download* del file
-   di ACK di ricezione esiti.
+6) la componente di avvisatura del NodoSPC esegue il *download* del file di ACK di ricezione esiti.
 
-Ogni invio di file (dall’Ente Creditore al NodoSPC e viceversa) prevede
-una risposta mediante file di presa in carico (file ACK).
+Ogni invio di file (dall’Ente Creditore al NodoSPC e viceversa) prevede una risposta mediante file di presa in carico (file ACK).
 
-Il processo termina con l’invio dell’ultimo file di ACK da parte
-dell’Ente Creditore.
+Il processo termina con l’invio dell’ultimo file di ACK da parte dell’Ente Creditore.
 
-Le specifiche di interfaccia via File Transfer e le relative convenzioni
-di nomenclatura dei file scambiati sono indicate nel successivo
-paragrafo 8.7.2\ **. **
+Le specifiche di interfaccia via File Transfer e le relative convenzioni di nomenclatura dei file scambiati sono indicate nel successivo paragrafo 8.7.2\ **. **
 
-Il protocollo di colloquio *Web service* con il sistemaMobile del PSP è
-specificato nel paragrafo Avvisatura digitale push (su iniziativa dell'Ente Creditore), mentre per il colloquio via e-mail e sms
-saranno utilizzati i protocolli standard previsti per questi canali.
+Il protocollo di colloquio *Web service* con il sistemaMobile del PSP è specificato nel paragrafo Avvisatura digitale push (su iniziativa dell'Ente Creditore), mentre per il colloquio via e-mail e sms saranno utilizzati i protocolli standard previsti per questi canali.
 
-Da questo momento in poi, superato il periodo di ritenzione delle
-informazioni, il NodoSPC provvede ad attivare le procedure di
-svecchiamento e cancellazione degli avvisi.
+Da questo momento in poi, superato il periodo di ritenzione delle informazioni, il NodoSPC provvede ad attivare le procedure di svecchiamento e cancellazione degli avvisi.
 
 +--------------------------------------------------------------+----+
 | .. rubric:: Processo di avvisatura in modalità Web service   |    |
@@ -749,149 +694,82 @@ svecchiamento e cancellazione degli avvisi.
 |    :class: Titolo4n                                          |    |
 +--------------------------------------------------------------+----+
 
-La Figura 34 rappresenta graficamente il processo che prevede l'inoltro
-del singolo avviso di pagamento attivato in modalità *Web service* dove
-con la dicitura mobileBackEndPSP si intende una piattaforma che rende
-raggiungibile l’utilizzatore finale mediante *mobile* *app* messe a
-disposizione dai PSP, mentre per *Server*\ CanaliDigitali si intende una
-piattaforma che consente di inviare all’utilizzatore finale gli avvisi
-tramite e-mail e SMS.
+La Figura 34 rappresenta graficamente il processo che prevede l'inoltro del singolo avviso di pagamento attivato in modalità *Web service* dove con la dicitura mobileBackEndPSP si intende una piattaforma che rende raggiungibile l’utilizzatore finale mediante *mobile* *app* messe a disposizione dai PSP, mentre per *Server*\ CanaliDigitali si intende una piattaforma che consente di inviare all’utilizzatore finale gli avvisi tramite e-mail e SMS.
 
 |PlantUML diagram|
 
-\ **Figura 34 – *Sequence diagram* del processo di avvisatura via *Web
-service***
+\ **Figura 34 – *Sequence diagram* del processo di avvisatura via *Web service***
 
 Il *workflow* del processo si compone dei seguenti passi:
 
-1) la componente di *Back-end* dell’Ente Creditore invia al NodoSPC una
-   richiesta di avviso digitale (vedi Tabella 19 a pagina 99) attraverso
-   la primitiva ***nodoInviaAvvisoDigitale***;
+1) la componente di *Back-end* dell’Ente Creditore invia al NodoSPC una richiesta di avviso digitale (vedi Tabella 19 a pagina 99) attraverso la primitiva ***nodoInviaAvvisoDigitale***;
 
-2) la componente di avvisatura del NodoSPC verifica la correttezza
-   sintattica dell’avviso;
+2) la componente di avvisatura del NodoSPC verifica la correttezza sintattica dell’avviso;
 
-3) in caso di errori, la componente di avvisatura del NodoSPC invia una
-   *response* negativa per la primitiva ***nodoInviaAvvisoDigitale*** e
-   chiude la transazione;
+3) in caso di errori, la componente di avvisatura del NodoSPC invia una *response* negativa per la primitiva ***nodoInviaAvvisoDigitale*** e chiude la transazione;
 
-4) in caso di correttezza formale, la componente di avvisatura del
-   NodoSPC prende in carico l’avviso digitale e verifica la rispondenza
-   ai criteri indicati al precedente paragrafo 8.2.6.1 per la gestione
-   del singolo avviso;
+4) in caso di correttezza formale, la componente di avvisatura del NodoSPC prende in carico l’avviso digitale e verifica la rispondenza ai criteri indicati al precedente paragrafo 8.2.6.1 per la gestione del singolo avviso;
 
-5) in caso di soddisfacimento del criterio (b) o del criterio (c) o di
-   entrambi, la componente di avvisatura del NodoSPC invia l’avviso
-   digitale alla piattaforma di gestione dei canali digitali;
+5) in caso di soddisfacimento del criterio (b) o del criterio (c) o di entrambi, la componente di avvisatura del NodoSPC invia l’avviso digitale alla piattaforma di gestione dei canali digitali;
 
-6) la piattaforma di gestione dei canali digitali inoltra
-   all’utilizzatore finale sia l'avviso tramite e-mail, sia tramite SMS
+6) la piattaforma di gestione dei canali digitali inoltra all’utilizzatore finale sia l'avviso tramite e-mail, sia tramite SMS
 
-7) la componente di avvisatura del NodoSPC predispone l’esito
-   dell’avviso per i canali e-mail e SMS;
+7) la componente di avvisatura del NodoSPC predispone l’esito dell’avviso per i canali e-mail e SMS;
 
-Ciclo per elaborare tutti i canali mobile dei PSP che soddisfano il
-criterio (a) indicato al precedente paragrafo 8.2.6.1:
+Ciclo per elaborare tutti i canali mobile dei PSP che soddisfano il criterio (a) indicato al precedente paragrafo 8.2.6.1:
 
-1) la componente di avvisatura del NodoSPC invia, attraverso la
-   primitiva ***pspInviaAvvisoDigitale***, l’avviso digitale alla
-   componente di gestione *mobile* *Back-end* del PSP;
+1) la componente di avvisatura del NodoSPC invia, attraverso la primitiva ***pspInviaAvvisoDigitale***, l’avviso digitale alla componente di gestione *mobile* *Back-end* del PSP;
 
-2) la componente di gestione *mobile* *Back-end* del PSP prende in
-   carico l'avviso, per l'inoltro alla *app* dell'utilizzatore finale, e
-   fornisce conferma alla componente di avvisatura del NodoSPC;
+2) la componente di gestione *mobile* *Back-end* del PSP prende in carico l'avviso, per l'inoltro alla *app* dell'utilizzatore finale, e fornisce conferma alla componente di avvisatura del NodoSPC;
 
-3) la componente di avvisatura del NodoSPC predispone l’esito
-   dell’avviso per il canale mobile;
+3) la componente di avvisatura del NodoSPC predispone l’esito dell’avviso per il canale mobile;
 
 Al termine dell'elaborazione del ciclo:
 
-1) la componente di avvisatura del NodoSPC invia una *response* positiva
-   contenente gli esiti dell'inoltro dell'avviso (vedi Tabella 20 a
-   pagina 100) per la primitiva ***nodoInviaAvvisoDigitale***;
+1) la componente di avvisatura del NodoSPC invia una *response* positiva contenente gli esiti dell'inoltro dell'avviso (vedi Tabella 20 a pagina 100) per la primitiva ***nodoInviaAvvisoDigitale***;
 
-Il protocollo di colloquio *Web service* con la componente di *Back-end*
-dell’Ente Creditore è specificato nel paragrafo Avvisatura digitale push (su iniziativa dell'Ente Creditore), quello con la componente
-di gestione *mobile* *Back-end* del PSP è specificato nel paragrafo PSP Invia Avvivo Digitale; per il colloquio via
-e-mail e sms saranno utilizzati i protocolli standard previsti per
+Il protocollo di colloquio *Web service* con la componente di *Back-end* dell’Ente Creditore è specificato nel paragrafo Avvisatura digitale push (su iniziativa dell'Ente Creditore), quello con la componente di gestione *mobile* *Back-end* del PSP è specificato nel paragrafo PSP Invia Avvivo Digitale; per il colloquio via e-mail e sms saranno utilizzati i protocolli standard previsti per
 questi canali.
 
 Casi di errore e strategie di ripristino
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nel caso di *timeout* nel corso di un invio e di altre casistiche dove
-l’invio risultasse incerto, la riproposizione delle richieste di avviso
-digitale e di esito deve contenere l’informazione originale
-dell’elemento identificativoMessaggioRichiesta che ha generato il
-*timeout*, ciò per consentire alla parte che riceve l’avviso digitale
-oppure l’esito della consegna di riconoscere la duplicazione dell’invio
-e gestire correttamente l’inoltro al destinatario.
+Nel caso di *timeout* nel corso di un invio e di altre casistiche dove l’invio risultasse incerto, la riproposizione delle richieste di avviso digitale e di esito deve contenere l’informazione originale dell’elemento identificativoMessaggioRichiesta che ha generato il *timeout*, ciò per consentire alla parte che riceve l’avviso digitale oppure l’esito della consegna di riconoscere la duplicazione dell’invio e gestire correttamente l’inoltro al destinatario.
 
 Processo di avvisatura digitale *pull* (verifica della posizione debitoria)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Il sistema mette a disposizione apposite funzioni affinché la "posizione
-debitoria" di un soggetto pagatore presso un singolo Ente Creditore
-possa essere interrogata dall'utilizzatore finale attraverso le funzioni
-messe a disposizione dai PSP aderenti all'iniziativa.
+Il sistema mette a disposizione apposite funzioni affinché la "posizione debitoria" di un soggetto pagatore presso un singolo Ente Creditore possa essere interrogata dall'utilizzatore finale attraverso le funzioni messe a disposizione dai PSP aderenti all'iniziativa.
 
-Poiché il processo di verifica affinché della "posizione debitoria"
-prende avvio presso il PSP, per il *workflow* dettagliato si faccia
-riferimento al paragrafo Processo di avvisatura digitale pull (verifica della posizione debitoria).
+Poiché il processo di verifica affinché della "posizione debitoria" prende avvio presso il PSP, per il *workflow* dettagliato si faccia riferimento al paragrafo Processo di avvisatura digitale pull (verifica della posizione debitoria).
 
 Processo di notifica di chiusura delle "operazioni pendenti"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le "operazioni pendenti" sono quelle associate a RPT positivamente
-inviate al PSP a cui non corrisponde la ricezione di una RT correlata.
-Per queste operazioni, il Nodo dei Pagamenti-SPC provvede a generare
-automaticamente, trascorso il periodo di ritenzione previsto, una RT di
-chiusura dell'operazione verso l'Ente Creditore ed a notificare l'evento
-al PSP.
+Le "operazioni pendenti" sono quelle associate a RPT positivamente inviate al PSP a cui non corrisponde la ricezione di una RT correlata. Per queste operazioni, il Nodo dei Pagamenti-SPC provvede a generare automaticamente, trascorso il periodo di ritenzione previsto, una RT di chiusura dell'operazione verso l'Ente Creditore ed a notificare l'evento al PSP.
 
-Poiché il processo di notifica di chiusura di tali operazioni ha impatti
-operativi minimali per l'Ente Creditore, per il *workflow* dettagliato
-si rimanda al paragrafo Processo di notifica di chiusura delle operazioni pendenti.
+Poiché il processo di notifica di chiusura di tali operazioni ha impatti operativi minimali per l'Ente Creditore, per il *workflow* dettagliato si rimanda al paragrafo Processo di notifica di chiusura delle operazioni pendenti.
 
-L'Ente Creditore dovrà infatti gestire una RT negativa generata dal
-NodoSPC che porta a bordo un codice esito particolare atto a segnalare
-tale fattispecie.
+L'Ente Creditore dovrà infatti gestire una RT negativa generata dal NodoSPC che porta a bordo un codice esito particolare atto a segnalare tale fattispecie.
 
 Interfacce Web service e dettaglio azioni SOAP
 ----------------------------------------------
 
-Per gestire l'interazione tra Enti Creditori e Nodo dei Pagamenti-SPC
-sono previsti i metodi indicati nei paragrafi successivi e raccolti
-nelle interfacce *Web service* indicate nei WSDL di cui al paragrafo
-14.1 dell'Appendice 1.
+Per gestire l'interazione tra Enti Creditori e Nodo dei Pagamenti-SPC sono previsti i metodi indicati nei paragrafi successivi e raccolti nelle interfacce *Web service* indicate nei WSDL di cui al paragrafo 14.1 dell'Appendice 1.
 
-Tutti i metodi utilizzano la modalità sincrona del paradigma SOAP e
-utilizzano il protocollo *https* per il trasporto.
+Tutti i metodi utilizzano la modalità sincrona del paradigma SOAP e utilizzano il protocollo *https* per il trasporto.
 
-Nei paragrafi successivi sono riportate le specifiche di dettaglio delle
-primitive utilizzate dagli Enti creditori per interagire con il Nodo dei
-Pagamenti-SPC.
+Nei paragrafi successivi sono riportate le specifiche di dettaglio delle primitive utilizzate dagli Enti creditori per interagire con il Nodo dei Pagamenti-SPC.
 
-Per ogni primitiva saranno indicati i parametri della *request*
-(***Parametri di input***), della *response* (***Parametri di
-output***), nonché eventuali parametri presenti nella testata della
-primitiva (***Parametri header***). Ove non diversamente specificato i
-parametri indicati sono obbligatori.
+Per ogni primitiva saranno indicati i parametri della *request* (***Parametri di input***), della *response* (***Parametri di output***), nonché eventuali parametri presenti nella testata della primitiva (***Parametri header***). Ove non diversamente specificato i parametri indicati sono obbligatori.
 
-Per la ***Gestione degli errori*** sarà utilizzata una struttura
-***faultBean*** composta così come indicato al paragrafo La struttura faultBean. Con riferimento
-all'elemento faultBean.description, si precisa che, nel caso in cui il
-faultCode sia uguale a:
+Per la ***Gestione degli errori*** sarà utilizzata una struttura ***faultBean*** composta così come indicato al paragrafo La struttura faultBean. Con riferimento all'elemento faultBean.description, si precisa che, nel caso in cui il faultCode sia uguale a:
 
--  *PPT\_CANALE\_ERRORE*, il campo è valorizzato con il contenuto del
-       **faultBean** generato dal PSP, convertito in formato stringa;
+-  *PPT\_CANALE\_ERRORE*, il campo è valorizzato con il contenuto del **faultBean** generato dal PSP, convertito in formato stringa;
 
--  *CANALE\_SEMANTICA*, l'Ente Creditore dovrà indicare lo specifico
-   errore legato all'elaborazione dell'oggetto ricevuto.
+-  *CANALE\_SEMANTICA*, l'Ente Creditore dovrà indicare lo specifico errore legato all'elaborazione dell'oggetto ricevuto.
 
-Infine, per quanto riguarda la sintassi delle *query string* presenti
-nei paragrafi successivi, si tenga presente che sarà utilizzato lo
-standard "de facto" degli URL http:
+Infine, per quanto riguarda la sintassi delle *query string* presenti nei paragrafi successivi, si tenga presente che sarà utilizzato lo standard "de facto" degli URL http:
 
 “parametro1=valore1&parametro2=valore2 .... &parametroN=valoreN”
 
@@ -900,42 +778,25 @@ Invio e richiesta dello stato delle RPT
 
 .. figure:: media/figura35.png
 
-\ **Figura 35 – NodoSPC/EC: Metodi di invio delle RPT e funzioni
-ancillari**
+\ **Figura 35 – NodoSPC/EC: Metodi di invio delle RPT e funzioni ancillari**
 
-Con riferimento a tutti i modelli di pagamento previsti relativamente
-all'invio delle RPT e al funzionamento delle funzioni ancillari, il Nodo
-dei Pagamenti-SPC rende disponibili i seguenti metodi SOAP,
-rappresentati nel diagramma di Figura 35:
+Con riferimento a tutti i modelli di pagamento previsti relativamente all'invio delle RPT e al funzionamento delle funzioni ancillari, il Nodo dei Pagamenti-SPC rende disponibili i seguenti metodi SOAP, rappresentati nel diagramma di Figura 35:
 
-a. ***nodoInviaRPT***, con la quale viene sottomessa a Nodo dei
-   Pagamenti-SPC una specifica RPT; l'esito fornisce ulteriori
-   indicazioni agli Enti Creditori aderenti per la gestione del proprio
-   *workflow*;
+a. ***nodoInviaRPT***, con la quale viene sottomessa a Nodo dei Pagamenti-SPC una specifica RPT; l'esito fornisce ulteriori indicazioni agli Enti Creditori aderenti per la gestione del proprio *workflow*;
 
-b. ***nodoInviaCarrelloRPT***, con la quale viene sottomesso al NodoSPC
-   un vettore di RPT, detto in gergo “carrello”, nel quale le varie RPT
-   possono avere beneficiari tra loro differenti.
+b. ***nodoInviaCarrelloRPT***, con la quale viene sottomesso al NodoSPC un vettore di RPT, detto in gergo “carrello”, nel quale le varie RPT possono avere beneficiari tra loro differenti.
 
-    Gli Enti Creditori beneficiari dei pagamenti presenti nel “carrello”
-    debbono fare riferimento ad un unico intermediario tecnologico.
+    Gli Enti Creditori beneficiari dei pagamenti presenti nel “carrello” debbono fare riferimento ad un unico intermediario tecnologico.
 
-    Il soggetto versante che richiede il pagamento deve essere lo stesso
-    per tutte le RPT facenti parte del “carrello”, mentre il soggetto
-    pagatore può essere diverso all’interno del “carrello”.
+    Il soggetto versante che richiede il pagamento deve essere lo stesso per tutte le RPT facenti parte del “carrello”, mentre il soggetto pagatore può essere diverso all’interno del “carrello”.
 
-    L'esito della primitiva fornisce ulteriori indicazioni al mittente
-    per la gestione del proprio *workflow*.
+    L'esito della primitiva fornisce ulteriori indicazioni al mittente per la gestione del proprio *workflow*.
 
-a. ***nodoChiediStatoRPT***, restituisce una struttura descrittiva dello
-   stato di una specifica RPT e dei suoi pagamenti.
+a. ***nodoChiediStatoRPT***, restituisce una struttura descrittiva dello stato di una specifica RPT e dei suoi pagamenti.
 
-b. ***nodoChiediListaPendentiRPT***, restituisce l’insieme di
-   riferimenti a tutte le RPT per le quali non è ancora pervenuta al
-   NodoSPC la relativa RT;
+b. ***nodoChiediListaPendentiRPT***, restituisce l’insieme di riferimenti a tutte le RPT per le quali non è ancora pervenuta al NodoSPC la relativa RT;
 
-c. ***nodoChiediSceltaWISP***, restituisce l’insieme dei parametri
-   relativi al PSP scelto per mezzo della componente WISP.
+c. ***nodoChiediSceltaWISP***, restituisce l’insieme dei parametri relativi al PSP scelto per mezzo della componente WISP.
 
 +----------------------------+----+
 | .. rubric:: nodoInviaRPT   |    |
@@ -943,11 +804,7 @@ c. ***nodoChiediSceltaWISP***, restituisce l’insieme dei parametri
 |    :class: Titolo4n        |    |
 +----------------------------+----+
 
-La primitiva sottomette al Nodo dei Pagamenti-SPC una (singola) RPT. La
-RPT è accettata, e quindi presa in carico dal sistema, oppure respinta
-con errore. Quando la transazione riguarda il processo di pagamento con
-esecuzione immediata, la *response* contiene lo URL di re-direzione per
-il pagamento online.
+La primitiva sottomette al Nodo dei Pagamenti-SPC una (singola) RPT. La RPT è accettata, e quindi presa in carico dal sistema, oppure respinta con errore. Quando la transazione riguarda il processo di pagamento con esecuzione immediata, la *response* contiene lo URL di re-direzione per il pagamento online.
 
 Parametri header
 
@@ -983,19 +840,15 @@ Parametri di output
 
 1. esito: OK oppure KO
 
-2. Redirect: valori ammessi 0 \| 1; specifica se il pagamento prescelto
-   dall'utente prevede la re-direzione dell’utilizzatore finale
+2. Redirect: valori ammessi 0 \| 1; specifica se il pagamento prescelto dall'utente prevede la re-direzione dell’utilizzatore finale
 
-3. URL: a cui re-dirigere il browser dell’utilizzatore finale,
-   contenente anche una *query string* “idSession=<idSession>” che
-   identifica univocamente l’operazione di pagamento
+3. URL: a cui re-dirigere il browser dell’utilizzatore finale, contenente anche una *query string* “idSession=<idSession>” che identifica univocamente l’operazione di pagamento
 
 Gestione degli errori
 
 in caso di errore: ***faultBean*** emesso dal ***NodoSPC***.
 
-Di seguito i possibili valori dell'elemento faultBean.faultCode in
-funzione di faultBean.id:
+Di seguito i possibili valori dell'elemento faultBean.faultCode in funzione di faultBean.id:
 
 1. faultBean.id = <identificativoPSP>:
 
@@ -1067,14 +920,9 @@ funzione di faultBean.id:
 |    :class: Titolo4n                |    |
 +------------------------------------+----+
 
-La primitiva è utilizzabile solo per gestire il *workflow* del modello
-di pagamento con esecuzione immediata e sottomette al Nodo dei
-Pagamenti-SPC un “carrello” costituito da una lista di RPT. La lista di
-RPT è accettata, e quindi presa in carico dal Nodo dei Pagamenti-SPC,
-oppure respinta per intero con errore.
+La primitiva è utilizzabile solo per gestire il *workflow* del modello di pagamento con esecuzione immediata e sottomette al Nodo dei Pagamenti-SPC un “carrello” costituito da una lista di RPT. La lista di RPT è accettata, e quindi presa in carico dal Nodo dei Pagamenti-SPC, oppure respinta per intero con errore.
 
-La *response* contiene l’URL di re-direzione per il pagamento online
-relativo all’intero “carrello”.
+La *response* contiene l’URL di re-direzione per il pagamento online relativo all’intero “carrello”.
 
 Parametri Header
 
@@ -1112,29 +960,19 @@ Parametri di input
 
 Parametri di output
 
-1. URL: a cui re-dirigere il browser dell’utilizzatore finale,
-   contenente anche una *query string* “idSession=<idSession>” che
-   identifica univocamente l’operazione di pagamento
+1. URL: a cui re-dirigere il browser dell’utilizzatore finale, contenente anche una *query string* “idSession=<idSession>” che identifica univocamente l’operazione di pagamento
 
 2. esitoComplessivoOperazione: OK oppure KO.
 
 Gestione degli errori
 
-Se il parametro esitoComplessivoOperazione non è **OK**, sarà presente
-un singolo ***faultBean*** nel formato specificato in Tabella 51, oppure
-sarà presente la struttura ***listaErroriRPT*** costituita da *n*
-elementi faultBean, dove può essere presente l'elemento opzionale serial
-(obbligatorio quando la lista contiene più di un elemento). Il
-***faultBean*** e/o la ***listaErroriRPT*** sono emessi dal
-***NodoSPC*.**
+Se il parametro esitoComplessivoOperazione non è **OK**, sarà presente un singolo ***faultBean*** nel formato specificato in Tabella 51, oppure sarà presente la struttura ***listaErroriRPT*** costituita da *n* elementi faultBean, dove può essere presente l'elemento opzionale serial (obbligatorio quando la lista contiene più di un elemento). Il ***faultBean*** e/o la ***listaErroriRPT*** sono emessi dal ***NodoSPC*.**
 
-Di seguito i possibili valori dell'elemento faultBean.faultCode in
-funzione di faultBean.id:
+Di seguito i possibili valori dell'elemento faultBean.faultCode in funzione di faultBean.id:
 
 1. faultBean.id = <identificativoPSP>:
 
-    *PPT\_CANALE\_ERRORE* (vedi precisazioni al dato
-    faultBean.description)
+    *PPT\_CANALE\_ERRORE* (vedi precisazioni al dato faultBean.description)
 
     *PPT\_RPT\_DUPLICATA*
 
@@ -1201,13 +1039,8 @@ funzione di faultBean.id:
 nodoChiediStatoRPT
 ~~~~~~~~~~~~~~~~~~
 
-La primitiva restituisce lo stato di una specifica RPT e dei suoi
-pagamenti, consentendo all’applicazione dell'Ente Creditore di
-realizzare funzionalità di monitoraggio verso l’utilizzatore finale.
-Poiché la *response* contiene le informazioni di *redirect* allo stesso
-modo della primitiva ***nodoInviaRPT***, questa primitiva consente di
-recuperare, se necessario, il caso in cui la *response* di una
-precedente ***nodoInviaRPT*** sia stata perduta.
+La primitiva restituisce lo stato di una specifica RPT e dei suoi pagamenti, consentendo all’applicazione dell'Ente Creditore di realizzare funzionalità di monitoraggio verso l’utilizzatore finale.
+Poiché la *response* contiene le informazioni di *redirect* allo stesso modo della primitiva ***nodoInviaRPT***, questa primitiva consente di recuperare, se necessario, il caso in cui la *response* di una precedente ***nodoInviaRPT*** sia stata perduta.
 
 Parametri di input
 
@@ -6164,9 +5997,7 @@ parti relative alla configurazione del PSP stesso, tranne che nelle
 parti che descrivono le condizioni economiche e le priorità di scelta in
 caso di mancata indicazione del canale.
 
-Qualora non sia presente una versione corrente del "*Catalogo Dati
-Informativi*" per l'ambiente indicato, il NodoSPC restituirà un
-*template* vuoto.
+Qualora non sia presente una versione corrente del "*Catalogo Dati Informativi*" per l'ambiente indicato, il NodoSPC restituirà un *template* vuoto.
 
 Parametri di input
 
