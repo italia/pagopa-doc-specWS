@@ -1,4 +1,4 @@
-Specifiche Implementazione Web Services
+Specifiche Implementazione Web Services (BOZZA)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. toctree::
@@ -20,4 +20,4 @@ PARTE DUE - Interazione tra Ente Creditore e Nodo SPC
 .. toctree::
    :maxdepth: 3
 
-   Interazione_EC_Nodo.rst
+   interazione_EC_Nodo.rst

@@ -1,73 +1,28 @@
-.. figure:: media/image1.png
-   :width: 100%
-
-+------------------------------------------------+
-| ***Specifiche implementazione Web Service***   |
-|                                                |
-| ***Versione*** ***2.0 -*** ***luglio 2017***   |
-+------------------------------------------------+
-
-+-------------------------------------------------------------------------+-------------------------------+
-| **Redazione del documento**                                             | **Verifica del documento **   |
-+-------------------------------------------------------------------------+-------------------------------+
-| Alberto Carletti, Mauro Bracalari, Daniele Giulivi, Giulia Montanelli   |                               |
-|                                                                         |                               |
-+-------------------------------------------------------------------------+-------------------------------+
-
 Interazione tra Ente Creditore e NodoSPC
 ========================================
 
-Questo capitolo descrive le interfacce utilizzate nella cooperazione
-applicativa tra Nodo dei Pagamenti-SPC e Enti Creditori aderenti. L'uso
-combinato di tali interfacce consente l'erogazione dei servizi di
-pagamento secondo i modelli di pagamento di cui sopra.
+Questo capitolo descrive le interfacce utilizzate nella cooperazione applicativa tra Nodo dei Pagamenti-SPC e Enti Creditori aderenti. L'uso combinato di tali interfacce consente l'erogazione dei servizi di pagamento secondo i modelli di pagamento di cui sopra.
 
-L'architettura SPCoop, di cooperazione applicativa, rende indipendenti i
-servizi applicativi dal loro indirizzo fisico.
+L'architettura SPCoop, di cooperazione applicativa, rende indipendenti i servizi applicativi dal loro indirizzo fisico.
 
-Nel nostro contesto, il legame tra Ente Creditore e Nodo dei
-Pagamenti-SPC passa attraverso l’intermediarioPA (in molti casi potrebbe
-coincidere con l'EC stesso), che con il proprio sistema si connette
-direttamente al Nodo dei Pagamenti-SPC con le modalità indicate.
+Nel nostro contesto, il legame tra Ente Creditore e Nodo dei Pagamenti-SPC passa attraverso l’intermediarioPA (in molti casi potrebb coincidere con l'EC stesso), che con il proprio sistema si connette direttamente al Nodo dei Pagamenti-SPC con le modalità indicate.
 
-Il Nodo dei Pagamenti-SPC pone a fattor comune le infrastrutture
-tecniche di comunicazione, agendo quindi come normalizzatore dei
-protocolli di accesso ai servizi di pagamento oltre a fornire funzioni
-di supporto all’utilizzatore finale per facilitare le operazioni di
-pagamento.
+Il Nodo dei Pagamenti-SPC pone a fattor comune le infrastrutture tecniche di comunicazione, agendo quindi come normalizzatore dei protocolli di accesso ai servizi di pagamento oltre a fornire funzioni di supporto all’utilizzatore finale per facilitare le operazioni di pagamento.
 
-Gli Enti Creditori aderenti, di conseguenza, devono implementare i
-protocolli di accesso al Nodo dei Pagamenti-SPC, come definiti dagli
-*Web service* relativi e utilizzati nei diversi modelli di pagamento.
+Gli Enti Creditori aderenti, di conseguenza, devono implementare i protocolli di accesso al Nodo dei Pagamenti-SPC, come definiti dagli *Web service* relativi e utilizzati nei diversi modelli di pagamento.
 
-Il Nodo dei Pagamenti-SPC, attraverso le informazioni di configurazione
-specifiche e i meccanismi di normalizzazione, rende disponibili le
-diverse soluzioni dei PSP facendosi carico di trattare le eventuali
-specificità dei protocolli di trust e comunicazione.
+Il Nodo dei Pagamenti-SPC, attraverso le informazioni di configurazione specifiche e i meccanismi di normalizzazione, rende disponibili le diverse soluzioni dei PSP facendosi carico di trattare le eventuali specificità dei protocolli di trust e comunicazione.
 
 Identificazione degli oggetti scambiati nel sistema pagoPA\ :sup:`®`
 ---------------------------------------------------------------------
 
-Gli oggetti legati all'esecuzione dei pagamenti scambiati nel sistema
-[Richiesta di Pagamento Telematico (RPT), Ricevuta Telematica (RT),
-Richiesta Revoca (RR) ed Esito Revoca (ER)] sono identificati in modo
-univoco dal "dominio" del singolo Ente Creditore (identificativoDominio)
-e dal codice IUV [1]_ (identificativoUnivocoVersamento).
+Gli oggetti legati all'esecuzione dei pagamenti scambiati nel sistema [Richiesta di Pagamento Telematico (RPT), Ricevuta Telematica (RT), Richiesta Revoca (RR) ed Esito Revoca (ER)] sono identificati in modo univoco dal "dominio" del singolo Ente Creditore (identificativoDominio) e dal codice IUV [1]_ (identificativoUnivocoVersamento).
 
-Al fine di consentire la ripetizione di un pagamento (ad esempio, in
-caso di esito negativo), a tale coppia di informazioni si associa un
-terzo dato che, nei casi previsti, codiceContestoPagamento (CCP) che
-identifica univocamente una singola attività di pagamento attivata
-presso un PSP e riferita al medesimo pagamento in attesa.
+Al fine di consentire la ripetizione di un pagamento (ad esempio, in caso di esito negativo), a tale coppia di informazioni si associa un terzo dato che, nei casi previsti, codiceContestoPagamento (CCP) che identifica univocamente una singola attività di pagamento attivata presso un PSP e riferita al medesimo pagamento in attesa.
 
-Ciò significa che ogni RPT, alla quale sono legati gli oggetti correlati
-(RT, RR, ER), può avere più repliche in funzione delle ripetute
-interazioni che potrebbero avvenire tra Enti Creditori e PSP nel corso
-dell'esecuzione di un pagamento.
+Ciò significa che ogni RPT, alla quale sono legati gli oggetti correlati (RT, RR, ER), può avere più repliche in funzione delle ripetute interazioni che potrebbero avvenire tra Enti Creditori e PSP nel corso dell'esecuzione di un pagamento.
 
-In Tabella 34 è riepilogato l'insieme di dati necessari ad identificare
-in modo univoco all'interno del sistema le interazioni tra i soggetti
-aderenti.
+In Tabella 34 è riepilogato l'insieme di dati necessari ad identificare in modo univoco all'interno del sistema le interazioni tra i soggetti aderenti.
 
 \ **Tabella 34 - Identificazione degli oggetti scambiati**
 
@@ -86,16 +41,9 @@ aderenti.
 *Workflow* dei modelli di pagamento e dei processi accessori
 ------------------------------------------------------------
 
-I paragrafi seguenti descrivono a livello generale, valide quindi per
-tutti i soggetti coinvolti, le interazioni tra gli Enti Creditori, il
-Nodo dei Pagamenti-SPC ed i PSP necessarie per attuare i modelli di
-pagamento indicati nel Capitolo 2 della Sezione I, focalizzando però
-l'attenzione sulle attività di pertinenza degli Enti Creditori.
+I paragrafi seguenti descrivono a livello generale, valide quindi per tutti i soggetti coinvolti, le interazioni tra gli Enti Creditori, il Nodo dei Pagamenti-SPC ed i PSP necessarie per attuare i modelli di pagamento indicati nel Capitolo 2 della Sezione I, focalizzando però l'attenzione sulle attività di pertinenza degli Enti Creditori.
 
-Pertanto, in questo paragrafo e nei successivi saranno analizzati nel
-dettaglio i *workflow* dei processi che sono attivati presso gli Enti
-Creditori. Sono, peraltro, qui descritti con meno dettagli anche i
-*workflow* dei processi che coinvolgono il Nodo dei Pagamenti-SPC.
+Pertanto, in questo paragrafo e nei successivi saranno analizzati nel dettaglio i *workflow* dei processi che sono attivati presso gli Enti Creditori. Sono, peraltro, qui descritti con meno dettagli anche i *workflow* dei processi che coinvolgono il Nodo dei Pagamenti-SPC.
 
 Pagamenti attivati presso l'Ente Creditore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -211,95 +159,58 @@ diagram* di Figura 23 a pagina 117, contempla i seguenti passi:
        pagamento utilizzato in caso di esito positivo del pagamento
        stesso.
 
-Le caratteristiche del Nodo dei Pagamenti-SPC consentono agli Enti
-Creditori di gestire in modo univoco il pagamento attivato presso il
-portale dell'ente senza vincoli rispetto all’implementazione realizzata
-dal PSP scelto dall'utilizzatore finale e viceversa.
+Le caratteristiche del Nodo dei Pagamenti-SPC consentono agli Enti Creditori di gestire in modo univoco il pagamento attivato presso il portale dell'ente senza vincoli rispetto all’implementazione realizzata dal PSP scelto dall'utilizzatore finale e viceversa.
 
-La componente WISP 2.0 del Nodo dei Pagamenti-SPC, che interfaccia i due
-soggetti, rende del tutto trasparente agli stessi le eventuali
-complessità, permettendo un comportamento univoco e standardizzato
-valido sia per i pagamenti con re indirizzamento on-line (Modello 1),
-sia per quelli con autorizzazione non contestuale gestita dal PSP
-(Modello 2).
+La componente WISP 2.0 del Nodo dei Pagamenti-SPC, che interfaccia i due soggetti, rende del tutto trasparente agli stessi le eventuali complessità, permettendo un comportamento univoco e standardizzato valido sia per i pagamenti con re indirizzamento on-line (Modello 1), sia per quelli con autorizzazione non contestuale gestita dal PSP (Modello 2).
 
 Workflow di Check-out e pagamento
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Come anticipato nel paragrafo precedente, i cambiamenti ai processi
-interni del NodoSPC modificano i *workflow* esistenti, senza peraltro
-comportare importanti modifiche nei confronti degli Enti Creditori che
-possono utilizzare un duplice approccio:
+Come anticipato nel paragrafo precedente, i cambiamenti ai processi interni del NodoSPC modificano i *workflow* esistenti, senza peraltro comportare importanti modifiche nei confronti degli Enti Creditori che possono utilizzare un duplice approccio:
 
-a) utilizzare direttamente la primitiva ***nodoInviaCarrelloRPT*** e
-       dati fissi per l'indicazione del PSP [2]_ verso quale richiedere
-       il pagamento (vedi Figura 24);
+a) utilizzare direttamente la primitiva ***nodoInviaCarrelloRPT*** e dati fissi per l'indicazione del PSP [2]_ verso quale richiedere il pagamento (vedi Figura 24);
 
-b) avvalersi della funzione di emulazione messa a disposizione dal
-       NodoSPC, *facility* che assicura la retro compatibilità con le
-       precedenti versioni (vedi Figura 25).
+b) avvalersi della funzione di emulazione messa a disposizione dal NodoSPC, *facility* che assicura la retro compatibilità con le precedenti versioni (vedi Figura 25).
 
 |PlantUML diagram|
 
 \ **Figura 24 - *Sequence diagram* del workflow di check-out e
 pagamento**
 
-Nello schema di Figura 24 è riportato il workflow relativo consigliato
-per questa fase del pagamento, che si compone dei seguenti passi:
+Nello schema di Figura 24 è riportato il workflow relativo consigliato per questa fase del pagamento, che si compone dei seguenti passi:
 
 1. l'utilizzatore finale esegue il check-out;
 
-2. il Portale EC invoca la primitiva ***nodoInviaCarrelloRPT*** per
-   trasmettere alla componente FESP del NodoSPC il carrello di RPT
-   (per l'indicazione del PSP verso il quale richiedere il pagamento
-   sono utilizzati dati fissi [3]_);
+2. il Portale EC invoca la primitiva ***nodoInviaCarrelloRPT*** per trasmettere alla componente FESP del NodoSPC il carrello di RPT (per l'indicazione del PSP verso il quale richiedere il pagamento sono utilizzati dati fissi [3]_);
 
 3. alla ricezione della primitiva, la componente FESP del NodoSPC
    verifica che le RPT ricevute siano utilizzabili per il pagamento;
 
     **se sono rilevati uno o più errori:**
 
-1. la componente FESP del NodoSPC fornisce al Portale EC la *response*
-   "KO" per la primitiva invocata al precedente punto 2;
+1. la componente FESP del NodoSPC fornisce al Portale EC la *response* "KO" per la primitiva invocata al precedente punto 2;
 
 2. la componente FESP del NodoSPC termina la transazione;
 
     **se non sono rilevati errori:**
 
-1. la componente FESP del NodoSPC fornisce al Portale EC la *response*
-   "OK" per la primitiva invocata al precedente punto 2. La
-   *response* contiene l'indirizzo URL [4]_ della componente WISP
-   2.0 del NodoSPC al quale si deve reindirizzare l’utilizzatore
-   finale;
+1. la componente FESP del NodoSPC fornisce al Portale EC la *response* "OK" per la primitiva invocata al precedente punto 2. La *response* contiene l'indirizzo URL [4]_ della componente WISP 2.0 del NodoSPC al quale si deve reindirizzare l’utilizzatore finale;
 
-2. il Portale EC reindirizza l’utilizzatore finale verso la componente
-   WISP 2.0 del NodoSPC utilizzando la *query string* definita al paragrafo Re-direzione dal Portale EC verso il Web-FESP (contenente anche il parametro idSessione);
+2. il Portale EC reindirizza l’utilizzatore finale verso la componente WISP 2.0 del NodoSPC utilizzando la *query string* definita al paragrafo Re-direzione dal Portale EC verso il Web-FESP (contenente anche il parametro idSessione);
 
-3. l'utilizzatore finale è reindirizzato nella *landing page* della
-   componente WISP 2.0 del NodoSPC.
+3. l'utilizzatore finale è reindirizzato nella *landing page* della componente WISP 2.0 del NodoSPC.
 
-Sulla base delle informazioni acquisite nel corso di questo processo, la
-componente WISP 2.0 del NodoSPC sarà in grado di proporre
-all'utilizzatore finale le pagine corrette per la scelta del PSP e
-quindi indirizzare la RPT nei confronti del PSP prescelto.
+Sulla base delle informazioni acquisite nel corso di questo processo, la componente WISP 2.0 del NodoSPC sarà in grado di proporre all'utilizzatore finale le pagine corrette per la scelta del PSP e quindi indirizzare la RPT nei confronti del PSP prescelto.
 
-Si noti che la sessione applicativa del Portale EC rimane in attesa
-dell'esito, che arriverà sempre mediante re-direzione dallo stesso
-componente WISP 2.0 del NodoSPC e sempre con gli stessi valori
-identificativi dell'esito, indipendenti dal PSP.
+Si noti che la sessione applicativa del Portale EC rimane in attesa dell'esito, che arriverà sempre mediante re-direzione dallo stesso componente WISP 2.0 del NodoSPC e sempre con gli stessi valori identificativi dell'esito, indipendenti dal PSP.
 
-L'approccio alternativo, cioè quello che utilizza la funzione di
-emulazione del NodoSPC, differisce da quello illustrato in precedenza in
-quanto introduce i passi da 2 a 6 (peraltro a carico del NodoSPC, cioè
-della funzione di emulazione).
+L'approccio alternativo, cioè quello che utilizza la funzione di emulazione del NodoSPC, differisce da quello illustrato in precedenza in quanto introduce i passi da 2 a 6 (peraltro a carico del NodoSPC, cioè della funzione di emulazione).
 
 |PlantUML diagram|
 
-\ **Figura 25 - *Sequence diagram* del workflow di check-out e pagamento
-con emulazione**
+\ **Figura 25 - *Sequence diagram* del workflow di check-out e pagamento con emulazione**
 
-Nello schema di Figura 25 è riportato il workflow relativo all'approccio
-con emulazione, che si compone dei seguenti passi:
+Nello schema di Figura 25 è riportato il workflow relativo all'approccio con emulazione, che si compone dei seguenti passi:
 
 1. l'utilizzatore finale esegue il check-out;
 
@@ -307,53 +218,30 @@ con emulazione, che si compone dei seguenti passi:
 
     *Inizio delle azioni della componente “Emulatore”*
 
-1. il portale EC effettua tramite HTTP POST la *redirect* sulle pagine
-   WISP 1.3, passando come parametri le informazioni riportate nel paragrafo
-   Interfacce HTTP per il servizio WISP;
+1. il portale EC effettua tramite HTTP POST la *redirect* sulle pagine WISP 1.3, passando come parametri le informazioni riportate nel paragrafo Interfacce HTTP per il servizio WISP;
 
-2. la componente WISP del NodoSPC ritorna il controllo al portale
-   dell'Ente Creditore, mediante re-direzione all’indirizzo
-   urlReturn (ricevuto al passo 3), con passaggio di dati
-   **idDominio + keyPA + keyWISP;**
+2. la componente WISP del NodoSPC ritorna il controllo al portale dell'Ente Creditore, mediante re-direzione all’indirizzo urlReturn (ricevuto al passo 3), con passaggio di dati **idDominio + keyPA + keyWISP;**
 
-3. il Portale EC riceve i parametri e, dal suo back-end, procede
-   all’invocazione in contesto sicuro (SPCoop) della primitiva
-   ***nodoChiediSceltaWISP***;
+3. il Portale EC riceve i parametri e, dal suo back-end, procede all’invocazione in contesto sicuro (SPCoop) della primitiva ***nodoChiediSceltaWISP***;
 
-4. la componente FESP del NodoSPC restituisce nella *response* dati PSP
-   fittizi [5]_, mantenuti unicamente per retro compatibilità;
+4. la componente FESP del NodoSPC restituisce nella *response* dati PSP fittizi [5]_, mantenuti unicamente per retro compatibilità;
 
     *Fine delle azioni della componente “Emulatore”*
 
-1. il Portale EC invoca la primitiva ***nodoInviaRPT*** o
-   ***nodoInviaCarrelloRPT*** per trasmettere alla componente FESP
-   del NodoSPC la RPT ovvero il carrello di RPT. Si tenga presente
-   che l'utilizzo della prima primitiva è deprecato per i nuovi
-   sviluppi e mantenuto unicamente per retro compatibilità.
+1. il Portale EC invoca la primitiva ***nodoInviaRPT*** o ***nodoInviaCarrelloRPT*** per trasmettere alla componente FESP del NodoSPC la RPT ovvero il carrello di RPT. Si tenga presente che l'utilizzo della prima primitiva è deprecato per i nuovi sviluppi e mantenuto unicamente per retro compatibilità.
 
-Da questo punto in poi, l'approccio in esame utilizza gli stessi passi
-previsti per il workflow analizzato in precedenza.
+Da questo punto in poi, l'approccio in esame utilizza gli stessi passi previsti per il workflow analizzato in precedenza.
 
 Invio carrello al PSP
 ~~~~~~~~~~~~~~~~~~~~~
 
-Questa passo del workflow complessivo si attiva una volta che
-l'utilizzatore finale ha operato le sue scelte sulla componente WISP 2.0
-del NodoSPC (vedi punto 3 dell'\ *activity diagram* di Figura 23 a
-pagina 117): se ha scelto di pagare con carta, il pagamento è già
-avvenuto e al PSP viene inviata la RPT o il carrello di RPT; viceversa,
-se ha scelto altre modalità, il pagamento deve ancora essere effettuato.
+Questa passo del workflow complessivo si attiva una volta che l'utilizzatore finale ha operato le sue scelte sulla componente WISP 2.0 del NodoSPC (vedi punto 3 dell'\ *activity diagram* di Figura 23 a pagina 117): se ha scelto di pagare con carta, il pagamento è già avvenuto e al PSP viene inviata la RPT o il carrello di RPT; viceversa, se ha scelto altre modalità, il pagamento deve ancora essere effettuato.
 
-In questo paragrafo saranno pertanto analizzati gli scenari connessi
-alle attività di invio del carrello al PSP, che variano in funzione
-della scelta sopra menzionata, a seguito della quale, si possono
-individuare 3 diverse alternative:
+In questo paragrafo saranno pertanto analizzati gli scenari connessi alle attività di invio del carrello al PSP, che variano in funzione della scelta sopra menzionata, a seguito della quale, si possono individuare 3 diverse alternative:
 
-a) *con carta* attraverso il POS virtuale messo a disposizione dal
-   NodoSPC;
+a) *con carta* attraverso il POS virtuale messo a disposizione dal NodoSPC;
 
-b) *con re indirizzamento on-line* (modello 1) sulle pagine messe a
-   disposizione dal PSP;
+b) *con re indirizzamento on-line* (modello 1) sulle pagine messe a disposizione dal PSP;
 
 c) *con autorizzazione gestita dal PSP* (modello 2).
 
@@ -362,142 +250,83 @@ c) *con autorizzazione gestita dal PSP* (modello 2).
 \ **Figura 26 - *Sequence diagram* degli scenari di "Invio carrello al
 PSP"**
 
-Nello schema di Figura 26 a pagina 122, sono indicate i tre possibili
-scenari di invio del carrello di RPT al PSP:
+Nello schema di Figura 26 a pagina 122, sono indicate i tre possibili scenari di invio del carrello di RPT al PSP:
 
 **Scenario a) - Pagamento con carta (già eseguito)**
 
-1. la componente FESP del NodoSPC invia alla componente di *Back-end*
-   del PSP la RPT o il carrello di RPT ricevuto in precedenza (vedi
-   passo 2 del *sequence diagram* di Figura 24 a pagina 119) per mezzo
-   della primitiva ***pspInviaCarrelloRPTCarte***, avente tra i
-   parametri le informazioni relative all'identificativo della
-   transazione (RRN) e al suo costo. Dette commissioni sono quelle che
-   il PSP ha comunicato ad AgID attraverso il Catalogo Dati Informativi
-   , differenziate tra costi "*on us*" e "*over
-   all*";
+1. la componente FESP del NodoSPC invia alla componente di *Back-end* del PSP la RPT o il carrello di RPT ricevuto in precedenza (vedi passo 2 del *sequence diagram* di Figura 24 a pagina 119) per mezzo della primitiva ***pspInviaCarrelloRPTCarte***, avente tra i parametri le informazioni relative all'identificativo della transazione (RRN) e al suo costo. Dette commissioni sono quelle che il PSP ha comunicato ad AgID attraverso il Catalogo Dati Informativi, differenziate tra costi "*on us*" e "*over all*";
 
-2. la componente di *Back-end* del PSP prende in carico la RPT o il
-   carrello di RPT, invia la relativa *response* e resta in attesa che
-   la propria componente di *acquiring* confermi le informazioni
-   acquisite al punto precedente;
+2. la componente di *Back-end* del PSP prende in carico la RPT o il carrello di RPT, invia la relativa *response* e resta in attesa che la propria componente di *acquiring* confermi le informazioni acquisite al punto precedente;
 
 **Scenario b) - Pagamento con re indirizzamento on-line (da eseguire)**
 
-1. la componente FESP del NodoSPC invia alla componente di *Back-end*
-   del PSP la RPT o il carrello di RPT ricevuto in precedenza per mezzo
-   della primitiva ***pspInviaCarrelloRPT***;
+1. la componente FESP del NodoSPC invia alla componente di *Back-end* del PSP la RPT o il carrello di RPT ricevuto in precedenza per mezzo della primitiva ***pspInviaCarrelloRPT***;
 
-2. la componente di *Back-end* del PSP prende in carico la RPT o il
-   carrello di RPT, invia la relativa *response* (contiene il dato
-   parametriProfiloPagamento);
+2. la componente di *Back-end* del PSP prende in carico la RPT o il carrello di RPT, invia la relativa *response* (contiene il dato parametriProfiloPagamento);
 
-3. la componente FESP del NodoSPC innesca la componente WISP 2.0 per
-   attivare la redirezione sul Portale del PSP;
+3. la componente FESP del NodoSPC innesca la componente WISP 2.0 per attivare la redirezione sul Portale del PSP;
 
-4. la componente WISP 2.0 del NodoSPC esegue la *redirect* sulla la
-   componente WFESP;
+4. la componente WISP 2.0 del NodoSPC esegue la *redirect* sulla la componente WFESP;
 
-5. la componente WFESP del NodoSPC reindirizza il browser
-   dell'utilizzatore finale verso il Portale del PSP utilizzando la
-   *query string* definita al paragrafo Redirezione del WEB-FESP verso il Portale del PSP (contiene il dato parametriProfiloPagamento).
+5. la componente WFESP del NodoSPC reindirizza il browser dell'utilizzatore finale verso il Portale del PSP utilizzando la *query string* definita al paragrafo Redirezione del WEB-FESP verso il Portale del PSP (contiene il dato parametriProfiloPagamento).
 
 6. l'utilizzatore finale può eseguire il pagamento;
 
-**Scenario c) - Pagamento con autorizzazione gestita dal PSP (da
-eseguire)**
+**Scenario c) - Pagamento con autorizzazione gestita dal PSP (da eseguire)**
 
-1. la componente FESP del NodoSPC invia alla componente di *Back-end*
-   del PSP la RPT o il carrello di RPT ricevuto in precedenza per mezzo
-   della primitiva ***pspInviaRPT***;
+1. la componente FESP del NodoSPC invia alla componente di *Back-end* del PSP la RPT o il carrello di RPT ricevuto in precedenza per mezzo della primitiva ***pspInviaRPT***;
 
-2. la componente di *Back-end* del PSP invia la relativa *response* e
-   prende in carico la RPT o il carrello di RPT per il successivo
-   pagamento.
+2. la componente di *Back-end* del PSP invia la relativa *response* e prende in carico la RPT o il carrello di RPT per il successivo pagamento.
 
-Ancorché tuttora indicato per lo scenario c), l'utilizzo della primitiva
-***pspInviaRPT*** è deprecato e mantenuto per retro compatibilità in
-quanto un carrello di pagamenti può essere costituito da un'unica e sola
-RPT.
+Ancorché tuttora indicato per lo scenario c), l'utilizzo della primitiva ***pspInviaRPT*** è deprecato e mantenuto per retro compatibilità in quanto un carrello di pagamenti può essere costituito da un'unica e sola RPT.
 
 Workflow di chiusura della transazione presso EC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Come già accaduto per il paragrafo precedente, le attività in esame
-(conclusione del pagamento) si differenziano in funzione della scelta
-effettuata dall'utilizzatore finale attraverso la componente WISP 2.0
-del NodoSPC (vedi punto 3 dell'\ *activity diagram* di Figura 23 a
-pagina 117). A seguito di tale scelta, si possono individuare ancora 3
+Come già accaduto per il paragrafo precedente, le attività in esame (conclusione del pagamento) si differenziano in funzione della scelta effettuata dall'utilizzatore finale attraverso la componente WISP 2.0 del NodoSPC (vedi punto 3 dell'\ *activity diagram* di Figura 23 a pagina 117). A seguito di tale scelta, si possono individuare ancora 3
 diverse alternative di pagamento:
 
-a) *con carta* attraverso il POS virtuale messo a disposizione dal
-   NodoSPC;
+a) *con carta* attraverso il POS virtuale messo a disposizione dal NodoSPC;
 
-b) *con re indirizzamento on-line* (modello 1) sulle pagine messe a
-   disposizione dal PSP;
+b) *con re indirizzamento on-line* (modello 1) sulle pagine messe a disposizione dal PSP;
 
 c) *con autorizzazione gestita dal PSP* (modello 2).
 
-Si tenga presente che nel caso in cui il PSP riceva un carrello di RPT
-dovrà generare un insieme di RT e inviarle tutte con le primitive qui
-indicate, ciclando fino a raggiungere la numerosità del carrello.
+Si tenga presente che nel caso in cui il PSP riceva un carrello di RPT dovrà generare un insieme di RT e inviarle tutte con le primitive qui indicate, ciclando fino a raggiungere la numerosità del carrello.
 
-Nello sviluppo dei *workflow* del presente paragrafo, al fine di non
-complicare inutilmente gli schemi grafici, è stato rappresentato il caso
-di un una singola RPT o di un carrello composto da una sola RPT.
+Nello sviluppo dei *workflow* del presente paragrafo, al fine di non complicare inutilmente gli schemi grafici, è stato rappresentato il caso di un una singola RPT o di un carrello composto da una sola RPT.
 
 **Scenario a) - Pagamento con carta**
 
 |PlantUML diagram|
 
-\ **Figura 27 - *Sequence diagram* dello scenario "Pagamento con
-carta"**
+\ **Figura 27 - *Sequence diagram* dello scenario "Pagamento con carta"**
 
-Lo schema di Figura 27 a pagina 124, che definisce le attività nello
-scenario di "pagamento con carta", prevede i seguenti passi\ *:*
+Lo schema di Figura 27 a pagina 124, che definisce le attività nello scenario di "pagamento con carta", prevede i seguenti passi\ *:*
 
 **in caso di pagamento eseguito:**
 
-1. una volta completata positivamente la transazione con carta (credito,
-   debito, prepagata) attraverso il POS virtuale del NodoSPC, la
-   componente WFESP del NodoSPC reindirizza il browser dell'utilizzatore
-   finale verso il Portale EC utilizzando la *query string* definita al
-   paragrafo Redirezione HTTP da WISP verso il portale delle'Ente Creditore
-   (contiene l'esito positivo del pagamento);
+1. una volta completata positivamente la transazione con carta (credito, debito, prepagata) attraverso il POS virtuale del NodoSPC, la componente WFESP del NodoSPC reindirizza il browser dell'utilizzatore finale verso il Portale EC utilizzando la *query string* definita al paragrafo Redirezione HTTP da WISP verso il portale delle'Ente Creditore (contiene l'esito positivo del pagamento);
 
-2. la componente di *Back-end* del PSP, ricevuto il carrello di RPT (al
-   passo 2 del paragrafo precedente) genera la RT POSITIVA da inviare
-   all'ente Creditore;
+2. la componente di *Back-end* del PSP, ricevuto il carrello di RPT (al passo 2 del paragrafo precedente) genera la RT POSITIVA da inviare all'ente Creditore;
 
-3. la componente di *Back-end* del PSP invia la RT alla componente FESP
-   del NodoSPC utilizzando la primitiva ***nodoInviaRT***;
+3. la componente di *Back-end* del PSP invia la RT alla componente FESP del NodoSPC utilizzando la primitiva ***nodoInviaRT***;
 
-4. la componente FESP del NodoSPC invia al Portale dell'Ente Creditore
-   la RT pervenuta dal PSP utilizzando la primitiva ***paaInviaRT***;
+4. la componente FESP del NodoSPC invia al Portale dell'Ente Creditore la RT pervenuta dal PSP utilizzando la primitiva ***paaInviaRT***;
 
-5. il Portale EC invia la *response* della ***paaInviaRT*** alla
-   componente di FESP del NodoSPC;
+5. il Portale EC invia la *response* della ***paaInviaRT*** alla componente di FESP del NodoSPC;
 
-6. la componente FESP del NodoSPC invia la *response* della
-   ***nodoInviaRT*** alla componente di FESP del NodoSPC (si noti che la
-   primitiva ***nodoInviaRT*** è sincrona);
+6. la componente FESP del NodoSPC invia la *response* della ***nodoInviaRT*** alla componente di FESP del NodoSPC (si noti che la primitiva ***nodoInviaRT*** è sincrona);
 
 **in caso di timeout o abbandono:**
 
-1. la componente WISP 2.0 del NodoSPC segnala alla componente FESP che
-   si è verificata una condizione di timeout o di abbandono da parte
-   dell'utente;
+1. la componente WISP 2.0 del NodoSPC segnala alla componente FESP che si è verificata una condizione di timeout o di abbandono da parte dell'utente;
 
-2. ***solo in caso di abbandono***, la componente WFESP del NodoSPC
-   reindirizza il browser dell'utilizzatore finale verso il Portale EC
-   utilizzando la *query string* definita al paragrafo Redirezione HTTP da WISP verso il portale delle'Ente Creditore (contiene l'esito
-   negativo del pagamento);
+2. ***solo in caso di abbandono***, la componente WFESP del NodoSPC reindirizza il browser dell'utilizzatore finale verso il Portale EC utilizzando la *query string* definita al paragrafo Redirezione HTTP da WISP verso il portale delle'Ente Creditore (contiene l'esito negativo del pagamento);
 
-3. la componente FESP del NodoSPC genera una RT negativa, indicandone il
-   motivo (timeout o abbandono) nell'apposito campo;
+3. la componente FESP del NodoSPC genera una RT negativa, indicandone il motivo (timeout o abbandono) nell'apposito campo;
 
-4. la componente FESP del NodoSPC invia al Portale dell'Ente Creditore
-   la RT NEGATIVA utilizzando la primitiva ***paaInviaRT***;
+4. la componente FESP del NodoSPC invia al Portale dell'Ente Creditore la RT NEGATIVA utilizzando la primitiva ***paaInviaRT***;
 
 5. vedi precedente punto 5.
 
@@ -505,33 +334,21 @@ scenario di "pagamento con carta", prevede i seguenti passi\ *:*
 
 |PlantUML diagram|
 
-\ **Figura 28 - *Sequence diagram* dello scenario "Pagamento modello
-1"**
+\ **Figura 28 - *Sequence diagram* dello scenario "Pagamento modello 1"**
 
-Lo schema di Figura 28 a pagina 125, che definisce le attività nello
-scenario di "pagamento con re indirizzamento on-line", prevede i
-seguenti passi\ *:*
+Lo schema di Figura 28 a pagina 125, che definisce le attività nello scenario di "pagamento con re indirizzamento on-line", prevede i seguenti passi\ *:*
 
-20. l'utilizzatore finale, avendo scelto di effettuare il pagamento
-    on-line con modalità diversa dalla carta, completa la transazione
-    sulle pagine web messe a disposizione dal PSP;
+20. l'utilizzatore finale, avendo scelto di effettuare il pagamento on-line con modalità diversa dalla carta, completa la transazione sulle pagine web messe a disposizione dal PSP;
 
-21. alla conclusione del pagamento, il Portale del PSP rinvia alla
-    componente WFESP del NodoSPC per segnalarne il risultato;
+21. alla conclusione del pagamento, il Portale del PSP rinvia alla componente WFESP del NodoSPC per segnalarne il risultato;
 
-22. la componente WFESP del NodoSPC riceve l’esito del pagamento nella
-    *query string* definita al paragrafo Redirezione dal portale PSP verso il WEB FESP (contenente il codice di ritorno circa
-    l'esito della transazione);
+22. la componente WFESP del NodoSPC riceve l’esito del pagamento nella *query string* definita al paragrafo Redirezione dal portale PSP verso il WEB FESP (contenente il codice di ritorno circa l'esito della transazione);
 
-23. la componente WFESP del NodoSPC reindirizza il browser
-    dell'utilizzatore finale verso il Portale EC utilizzando la *query
-    string* definita al paragrafo Redirezione HTTP da WISP verso il portale delle'Ente Creditore (contiene l'esito del pagamento);
+23. la componente WFESP del NodoSPC reindirizza il browser dell'utilizzatore finale verso il Portale EC utilizzando la *query string* definita al paragrafo Redirezione HTTP da WISP verso il portale delle'Ente Creditore (contiene l'esito del pagamento);
 
-24. il Portale del PSP segnala l'esito del pagamento alla propria
-    componente di *Back-end*;
+24. il Portale del PSP segnala l'esito del pagamento alla propria componente di *Back-end*;
 
-25. sulla base dell'esito ricevuto, la componente di *Back-end* del PSP
-    genera la RT;
+25. sulla base dell'esito ricevuto, la componente di *Back-end* del PSP genera la RT;
 
 26. vedi precedente punto 3;
 
@@ -541,34 +358,23 @@ seguenti passi\ *:*
 
 29. vedi precedente punto 6.
 
-**In caso di timeout o abbandono sulla componente WISP 2.0 del NodoSPC,
-fare riferimento allo** **Scenario a) - Pagamento con carta.**
+**In caso di timeout o abbandono sulla componente WISP 2.0 del NodoSPC, fare riferimento allo** **Scenario a) - Pagamento con carta.**
 
 \ **Scenario c) - Pagamento con autorizzazione gestita dal PSP**
 
 |PlantUML diagram|
 
-\ **Figura 29 - *Sequence diagram* dello scenario "Pagamento modello
-2"**
+\ **Figura 29 - *Sequence diagram* dello scenario "Pagamento modello 2"**
 
-Il workflow legato a questo contesto (si veda lo schema di Figura 29 a
-pagina 126) prevede i seguenti passi:
+Il workflow legato a questo contesto (si veda lo schema di Figura 29 a pagina 126) prevede i seguenti passi:
 
-20. l'utilizzatore finale, avendo scelto la modalità con autorizzazione
-    non contestuale presso il PSP (lettera di manleva, ecc.), completa la transazione sulle pagine web messe a
-    disposizione dalla componente WISP 2.0 del NodoSPC;
+20. l'utilizzatore finale, avendo scelto la modalità con autorizzazione non contestuale presso il PSP (lettera di manleva, ecc.), completa la transazione sulle pagine web messe a disposizione dalla componente WISP 2.0 del NodoSPC;
 
-21. alla conclusione del pagamento, la componente WISP del NodoSPC
-    presenta all'utente una *Thank you page* nella quale è presente un
-    bottone per il ritorno al portale dell'Ente Creditore;
+21. alla conclusione del pagamento, la componente WISP del NodoSPC presenta all'utente una *Thank you page* nella quale è presente un bottone per il ritorno al portale dell'Ente Creditore;
 
-22. l'utilizzatore finale chiede di tornare al portale dell'Ente
-    Creditore;
+22. l'utilizzatore finale chiede di tornare al portale dell'Ente Creditore;
 
-23. la componente WFESP del NodoSPC reindirizza il browser
-    dell'utilizzatore finale verso il Portale EC utilizzando la *query
-    string* definita al paragrafo Redirezione HTTP da WISP verso il portale delle'Ente Creditore (contiene l'esito del pagamento impostato al
-    valore costante "DIFFERITO");
+23. la componente WFESP del NodoSPC reindirizza il browser dell'utilizzatore finale verso il Portale EC utilizzando la *query string* definita al paragrafo Redirezione HTTP da WISP verso il portale delle'Ente Creditore (contiene l'esito del pagamento impostato al valore costante "DIFFERITO");
 
     .... passi non tracciati ....
 
@@ -580,373 +386,223 @@ pagina 126) prevede i seguenti passi:
 
 23. vedi precedente punto 6.
 
-**In caso di timeout o abbandono sulla componente WISP 2.0 del NodoSPC,
-fare riferimento allo** **Scenario a) - Pagamento con carta.**
+**In caso di timeout o abbandono sulla componente WISP 2.0 del NodoSPC, fare riferimento allo** **Scenario a) - Pagamento con carta.**
 
 Controllo circa lo stato di avanzamento di un pagamento
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In alcune fasi del ciclo di vita del pagamento, soprattutto per quanto
-riguarda il pagamento con autorizzazione non contestuale gestita dal PSP
-(cosiddetto modello 2), l'utilizzatore finale ha la necessità di
-conoscere lo stato di avanzamento del pagamento in corso. A tale
-riguardo, il sistema mette a disposizione una particolare funzionalità
-che consente di avere tale informazione. Il *workflow* del processo
-prevede i seguenti passi, indicati in Figura 30:
+In alcune fasi del ciclo di vita del pagamento, soprattutto per quanto riguarda il pagamento con autorizzazione non contestuale gestita dal PSP (cosiddetto modello 2), l'utilizzatore finale ha la necessità di conoscere lo stato di avanzamento del pagamento in corso. A tale riguardo, il sistema mette a disposizione una particolare funzionalità che consente di avere tale informazione. Il *workflow* del processo prevede i seguenti passi, indicati in Figura 30:
 
-1)  l'utilizzatore finale, attraverso le funzioni di *Front-office*
-    dell'Ente Creditore, richiede di avere informazioni circa lo stato
-    di avanzamento di un pagamento;
+1)  l'utilizzatore finale, attraverso le funzioni di *Front-office* dell'Ente Creditore, richiede di avere informazioni circa lo stato di avanzamento di un pagamento;
 
-2)  il *Front-office* dell'Ente Creditore inoltra la richiesta alla
-    propria componente di *Back-end*;
+2)  il *Front-office* dell'Ente Creditore inoltra la richiesta alla propria componente di *Back-end*;
 
-3)  la componente di *Back-end* dell’Ente Creditore si attiva verso il
-    NodoSPC tramite la primitiva ***nodoChiediStatoRPT***;
+3)  la componente di *Back-end* dell’Ente Creditore si attiva verso il NodoSPC tramite la primitiva ***nodoChiediStatoRPT***;
 
 4)  il NodoSPC verifica la richiesta di storno;
 
-5)  se la richiesta non è valida, il NodoSPC invia una *response*
-    negativa e chiude la transazione:
+5)  se la richiesta non è valida, il NodoSPC invia una *response* negativa e chiude la transazione:
 
-6)  altrimenti, se la RPT non è ancora stata inviata al PSP, il NodoSPC
-    predispone la risposta per l'EC (il flusso prosegue al passo 11);
+6)  altrimenti, se la RPT non è ancora stata inviata al PSP, il NodoSPC predispone la risposta per l'EC (il flusso prosegue al passo 11);
 
-7)  altrimenti, se la RPT è già stata inviata al PSP, il Nodo dei
-    Pagamenti-SPC si attiva per richiedere informazioni alla componente
-    di *Back-end* del PSP di competenza, per mezzo della primitiva
-    ***pspChiediAvanzamentoRPT***;
+7)  altrimenti, se la RPT è già stata inviata al PSP, il Nodo dei Pagamenti-SPC si attiva per richiedere informazioni alla componente di *Back-end* del PSP di competenza, per mezzo della primitiva ***pspChiediAvanzamentoRPT***;
 
-8)  la componente di *Back-end* del PSP predispone la risposta per il
-    NodoSPC;
+8)  la componente di *Back-end* del PSP predispone la risposta per il NodoSPC;
 
-9)  la componente di *Back-end* del PSP invia la *response* con la
-    risposta e la invia al NodoSPC;
+9)  la componente di *Back-end* del PSP invia la *response* con la risposta e la invia al NodoSPC;
 
 10) il NodoSPC predispone la risposta per l'EC;
 
-11) il NodoSPC invia la *response* alla componente di *Back-end*
-    dell'Ente Creditore, contenente la risposta alla primitiva
-    ***nodoChiediStatoRPT***;
+11) il NodoSPC invia la *response* alla componente di *Back-end* dell'Ente Creditore, contenente la risposta alla primitiva ***nodoChiediStatoRPT***;
 
-12) la componente di *Back-end* dell'Ente Creditore inoltra la risposta
-    al proprio *Front-office*;
+12) la componente di *Back-end* dell'Ente Creditore inoltra la risposta al proprio *Front-office*;
 
-13) l'utilizzatore finale, attraverso le funzioni di *Front-office*, è
-    in grado di conoscere lo stato di avanzamento del pagamento.
+13) l'utilizzatore finale, attraverso le funzioni di *Front-office*, è in grado di conoscere lo stato di avanzamento del pagamento.
 
 |PlantUML diagram|
 
-\ **Figura 30 - *Sequence diagram* del controllo dello stato di un
-pagamento**
+\ **Figura 30 - *Sequence diagram* del controllo dello stato di un pagamento**
 
-Questa funzionalità può essere utilizzata dalla componente di *Back-end*
-dell'Ente Creditore in modo autonomo, senza interazione con l'utenza,
-per risolvere problematiche di errore (si veda il successivo paragrafo).
+Questa funzionalità può essere utilizzata dalla componente di *Back-end* dell'Ente Creditore in modo autonomo, senza interazione con l'utenza, per risolvere problematiche di errore (si veda il successivo paragrafo).
 
 Casi di errore e strategie di ripristino per l’Ente Creditore
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Dall'analisi dell’interazione complessiva esposta nei precedenti
-paragrafi, è possibile individuare le situazioni che generano
-indeterminatezza circa lo stato del pagamento:
+Dall'analisi dell’interazione complessiva esposta nei precedenti paragrafi, è possibile individuare le situazioni che generano indeterminatezza circa lo stato del pagamento:
 
-1) *esito dell'invio del carrello di RPT* (passo 6 del *Workflow* di
-   Check-out e pagamento): in questo caso l'Ente Creditore non è in
-   grado di ridirigere il browser dell'utilizzatore finale;
+1) *esito dell'invio del carrello di RPT* (passo 6 del *Workflow* di Check-out e pagamento): in questo caso l'Ente Creditore non è in grado di ridirigere il browser dell'utilizzatore finale;
 
-2) *esito della re-direzione sulla componente WISP 2.0 del NodoSPC*: è
-   uno stato temporaneo nel quale il portale dell'EC è in attesa di
-   essere attivato dalla componente WFESP del NodoSPC a seguito di uno
-   degli eventi relativi ai tre scenari previsti nel paragrafo Workflow di chiusura della transazione presso EC:
+2) *esito della re-direzione sulla componente WISP 2.0 del NodoSPC*: è uno stato temporaneo nel quale il portale dell'EC è in attesa di essere attivato dalla componente WFESP del NodoSPC a seguito di uno degli eventi relativi ai tre scenari previsti nel paragrafo Workflow di chiusura della transazione presso EC:
 
    a. abbandono della transazione,
 
    b. timeout gestito dalla componente WISP 2.0 del NodoSPC,
 
-   c. timeout gestito dal PSP [solo **Scenario b) - Pagamento con re
-          indirizzamento on-line**],
+   c. timeout gestito dal PSP [solo **Scenario b) - Pagamento con re indirizzamento on-line**],
 
    d. pagamento completato;
 
-3) *esito del pagamento*: in questo caso l'Ente Creditore è in attesa di
-   ricevere la Ricevuta Telematica predisposta dal NodoSPC (RT negativa)
-   o dal PSP (RT negativa o positiva).
+3) *esito del pagamento*: in questo caso l'Ente Creditore è in attesa di ricevere la Ricevuta Telematica predisposta dal NodoSPC (RT negativa) o dal PSP (RT negativa o positiva).
 
-Per ciò che attiene alla gestione dei timeout legati al processo di
-pagamento, si rimanda al documento "*Indicatori di qualità per i
-Soggetti Aderenti*" pubblicato sul sito dell'Agenzia.
+Per ciò che attiene alla gestione dei timeout legati al processo di pagamento, si rimanda al documento "*Indicatori di qualità per i Soggetti Aderenti*" pubblicato sul sito dell'Agenzia.
 
-Per gestire le situazioni di indeterminatezza sopra indicate, il NodoSPC
-mette a disposizione la primitiva *nodoChiediStatoRPT* attraverso la quale è possibile ottenere lo stato
-dell'operazione, comprensivo delle informazioni per riattivare la re
-direzione.
+Per gestire le situazioni di indeterminatezza sopra indicate, il NodoSPC mette a disposizione la primitiva *nodoChiediStatoRPT* attraverso la quale è possibile ottenere lo stato dell'operazione, comprensivo delle informazioni per riattivare la re direzione.
 
-Analizzando la *response* della primitiva in questione e lo stato della
-RPT (parametro O-3, si veda anche la Tabella 35 a pagina 142) è
-possibile definire i comportamenti da adottare in funzione di tali
-risultati:
+Analizzando la *response* della primitiva in questione e lo stato della RPT (parametro O-3, si veda anche la Tabella 35 a pagina 142) è possibile definire i comportamenti da adottare in funzione di tali risultati:
 
--  IUV sconosciuto (RPT non presente nel Nodo): l’Ente Creditore può
-   ripetere l’invio della RPT usando lo stesso IUV;
+-  IUV sconosciuto (RPT non presente nel Nodo): l’Ente Creditore può ripetere l’invio della RPT usando lo stesso IUV;
 
--  stato indeterminato: l’Ente Creditore resta in attesa, ripetendo la
-   chiedi stato;
+-  stato indeterminato: l’Ente Creditore resta in attesa, ripetendo la chiedi stato;
 
--  operazione in errore (con RPT presente nel Nodo): l’Ente Creditore
-   può ripetere l’invio della RPT usando un nuovo IUV;
+-  operazione in errore (con RPT presente nel Nodo): l’Ente Creditore può ripetere l’invio della RPT usando un nuovo IUV;
 
--  operazione di pagamento in corso o conclusa (positivamente o
-   negativamente): l’Ente Creditore attende la ricezione della RT.
+-  operazione di pagamento in corso o conclusa (positivamente o negativamente): l’Ente Creditore attende la ricezione della RT.
 
 Pagamento attivato presso il PSP
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Questo modello di pagamento, conosciuto anche come "Modello 3", presuppone che l’utilizzatore finale sia
-in possesso di un avviso (analogico o digitale) contenente le
-indicazioni necessarie per effettuare il pagamento.
+Questo modello di pagamento, conosciuto anche come "Modello 3", presuppone che l’utilizzatore finale sia in possesso di un avviso (analogico o digitale) contenente le indicazioni necessarie per effettuare il pagamento.
 
 Le attività in carico all’Ente Creditore sono la predisposizione:
 
-a) dell'archivio dei pagamenti in attesa (APA), contenente tutte le
-   informazioni, associate ad un identificativo univoco, necessarie
-   per effettuare il pagamento;
+a) dell'archivio dei pagamenti in attesa (APA), contenente tutte le informazioni, associate ad un identificativo univoco, necessarie per effettuare il pagamento;
 
-b) di un’applicazione “\ *server*\ ” dedicata necessaria per trattare le
-   richieste provenienti dai PSP, come meglio dettagliato nel paragrafo Pagamenti in attesa e richiesta di generazione della RPT;
+b) di un’applicazione “\ *server*\ ” dedicata necessaria per trattare le richieste provenienti dai PSP, come meglio dettagliato nel paragrafo Pagamenti in attesa e richiesta di generazione della RPT;
 
-c) capacità di trattare le Ricevute Telematiche (RT), così come indicato
-   nel paragrafo Ricezione delle RT e richiesta di copia.
+c) capacità di trattare le Ricevute Telematiche (RT), così come indicato nel paragrafo Ricezione delle RT e richiesta di copia.
 
 Per maggiori dettagli circa il *workflow* analitico si veda il paragrafi Pagamenti attivati presso il PSP.
 
-+-------------------------------------------------+----+
-| .. rubric:: Pagamento spontaneo presso il PSP   |    |
-|    :name: pagamento-spontaneo-presso-il-psp     |    |
-|    :class: Titolo4n                             |    |
-+-------------------------------------------------+----+
-
-Questo modello di pagamento, conosciuto anche come "Modello 4", consente all’utilizzatore finale di effettuare
-pagamenti presso i PSP pur non essendo in possesso di un avviso
-(analogico o digitale), ma sulla base di informazioni a lui note (ad
-esempio: la targa del veicolo nel caso di pagamento della tassa
-automobilistica).
+Pagamento spontaneo presso il PSP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Questo modello di pagamento, conosciuto anche come "Modello 4", consente all’utilizzatore finale di effettuare pagamenti presso i PSP pur non essendo in possesso di un avviso
+(analogico o digitale), ma sulla base di informazioni a lui note (ad esempio: la targa del veicolo nel caso di pagamento della tassa automobilistica).
 
 Le attività in carico all’Ente Creditore sono:
 
-a) la predisposizione dell'archivio dei pagamenti in attesa (APA), con
-   tutte le informazioni necessarie per effettuare il pagamento,
-   associate ad un identificativo univoco;
+a) la predisposizione dell'archivio dei pagamenti in attesa (APA), con tutte le informazioni necessarie per effettuare il pagamento, associate ad un identificativo univoco;
 
-b) la disponibilità di un archivio contenente le informazioni relative
-   al pagamento spontaneo (ad esempio: l'archivio dei veicoli, nel caso
-   di pagamento della tassa automobilistica);
+b) la disponibilità di un archivio contenente le informazioni relative al pagamento spontaneo (ad esempio: l'archivio dei veicoli, nel caso di pagamento della tassa automobilistica);
 
-c) la predisposizione di un’applicazione “\ *server*\ ” dedicata
-   necessaria per trattare le richieste provenienti dai PSP, che sia in
-   grado di associare la richiesta ad un pagamento in attesa oppure di
-   generarlo al momento.
+c) la predisposizione di un’applicazione “\ *server*\ ” dedicata necessaria per trattare le richieste provenienti dai PSP, che sia in grado di associare la richiesta ad un pagamento in attesa oppure di generarlo al momento.
 
-d) capacità di trattare le Ricevute Telematiche (RT), così come indicato
-   nel paragrafo Ricezione delle RT e richiesta di copia.
+d) capacità di trattare le Ricevute Telematiche (RT), così come indicato nel paragrafo Ricezione delle RT e richiesta di copia.
 
-Per maggiori dettagli circa il *workflow* analitico del Modello 4 si
-veda il paragrafo Presentazione dell'avviso e transcodifica dei dati per il pagamento.
+Per maggiori dettagli circa il *workflow* analitico del Modello 4 si veda il paragrafo Presentazione dell'avviso e transcodifica dei dati per il pagamento.
 
 Processo di revoca della Ricevuta Telematica
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Il NodoSPC permette di gestire i servizi telematici per le richieste di
-annullamento di pagamenti già effettuati e per i quali è già stata
-restituita la Ricevuta Telematica corrispondente, rendendo, a questo
-scopo, definendo un'interfaccia specifica, ad uso dei PSP, per
-richiedere all’Ente Creditore di riferimento la revoca di una RT
-specifica.
+Il NodoSPC permette di gestire i servizi telematici per le richieste di annullamento di pagamenti già effettuati e per i quali è già stata restituita la Ricevuta Telematica corrispondente, rendendo, a questo scopo, definendo un'interfaccia specifica, ad uso dei PSP, per richiedere all’Ente Creditore di riferimento la revoca di una RT specifica.
 
-Poiché il processo di revoca della RT si attiva presso il PSP, per il
-*workflow* dettagliato si faccia riferimento al paragrafo Processo di revoca della Ricevuta Telematica.
+Poiché il processo di revoca della RT si attiva presso il PSP, per il *workflow* dettagliato si faccia riferimento al paragrafo Processo di revoca della Ricevuta Telematica.
 
-**Si tenga presente che, come già indicato in precedenza, i metodi di
-gestione della Revoca della RT sopra indicati sono definiti, ma *non
-implementati* nelle strutture software del NodoSPC.**
+**Si tenga presente che, come già indicato in precedenza, i metodi di gestione della Revoca della RT sopra indicati sono definiti, ma *non implementati* nelle strutture software del NodoSPC.**
 
 Processo di storno del pagamento eseguito
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Qualora l’utilizzatore finale, a vario titolo, chieda all’Ente Creditore
-la cancellazione di un pagamento presso il quale questo è stato disposto
-(c.d. storno), il Nodo dei Pagamenti-SPC mette a disposizione i servizi
-telematici necessari per gestire le richieste di storno di pagamenti già
-effettuati e per i quali potrebbe essere già stata restituita la
-Ricevuta Telematica corrispondente.
+Qualora l’utilizzatore finale, a vario titolo, chieda all’Ente Creditore la cancellazione di un pagamento presso il quale questo è stato disposto (c.d. storno), il Nodo dei Pagamenti-SPC mette a disposizione i servizi telematici necessari per gestire le richieste di storno di pagamenti già effettuati e per i quali potrebbe essere già stata restituita la Ricevuta Telematica corrispondente.
 
 Il processo si attiva presso l’Ente Creditore.
 
-Dall'analisi del *Sequence diagram* del processo di Storno del pagamento
-riportato in Figura 31, si evidenziano i seguenti passi:
+Dall'analisi del *Sequence diagram* del processo di Storno del pagamento riportato in Figura 31, si evidenziano i seguenti passi:
 
-1) l'utilizzatore finale, attraverso le funzioni di *Front-office*
-   dell'Ente Creditore, richiede lo storno di un pagamento già
-   effettuato;
+1) l'utilizzatore finale, attraverso le funzioni di *Front-office* dell'Ente Creditore, richiede lo storno di un pagamento già effettuato;
 
-2) il *Front-office* dell'Ente Creditore inoltra la richiesta alla
-   propria componente di *Back-end*;
+2) il *Front-office* dell'Ente Creditore inoltra la richiesta alla propria componente di *Back-end*;
 
-3) la componente di *Back-end* dell’Ente Creditore richiede lo storno di
-   un pagamento inviando al NodoSPC la Richiesta Revoca (RR) tramite la
-   primitiva ***nodoInviaRichiestaStorno***;
+3) la componente di *Back-end* dell’Ente Creditore richiede lo storno di un pagamento inviando al NodoSPC la Richiesta Revoca (RR) tramite la primitiva ***nodoInviaRichiestaStorno***;
 
 4) il NodoSPC verifica la richiesta di storno;
 
-5) se la richiesta non è valida, il NodoSPC invia una *response*
-   negativa e chiude la transazione:
+5) se la richiesta non è valida, il NodoSPC invia una *response* negativa e chiude la transazione:
 
-6) se la richiesta è valida, il Nodo dei Pagamenti-SPC la inoltra alla
-   componente di *Back-end* del PSP di competenza per mezzo della
-   primitiva ***pspInviaRichiestaStorno***;
+6) se la richiesta è valida, il Nodo dei Pagamenti-SPC la inoltra alla componente di *Back-end* del PSP di competenza per mezzo della primitiva ***pspInviaRichiestaStorno***;
 
-7) la componente di *Back-end* del PSP conferma al NodoSPC la ricezione
-   della RR;
+7) la componente di *Back-end* del PSP conferma al NodoSPC la ricezione della RR;
 
-8) il NodoSPC conferma alla componente di *Back-end* dell’Ente Creditore
-   il corretto invio della richiesta di revoca al PSP;
+8) il NodoSPC conferma alla componente di *Back-end* dell’Ente Creditore il corretto invio della richiesta di revoca al PSP;
 
-***Attività non tracciate:*** la componente di *Back-end* del PSP e
-decide se accettarla o rifiutarla,
+***Attività non tracciate:*** la componente di *Back-end* del PSP e decide se accettarla o rifiutarla,
 
-1) la componente di *Back-end* del PSP predispone il messaggio di Esito
-   Revoca (ER);
+1) la componente di *Back-end* del PSP predispone il messaggio di Esito Revoca (ER);
 
-2) la componente di *Back-end* del PSP invia il messaggio di Esito
-   Revoca (ER) al NodoSPC utilizzando l'apposita primitiva
-   ***nodoInviaEsitoStorno***;
+2) la componente di *Back-end* del PSP invia il messaggio di Esito Revoca (ER) al NodoSPC utilizzando l'apposita primitiva ***nodoInviaEsitoStorno***;
 
 3) il NodoSPC verifica l'esito dell'esito di storno (ER);
 
-4) se la richiesta non è valida, il NodoSPC invia una *response*
-   negativa e chiude la transazione:
+4) se la richiesta non è valida, il NodoSPC invia una *response* negativa e chiude la transazione:
 
-5) se la richiesta è valida, il NodoSPC la inoltra alla componente di
-   *Back-end* dell’Ente Creditore richiedente per mezzo della primitiva
-   ***paaInviaEsitoStorno***;
+5) se la richiesta è valida, il NodoSPC la inoltra alla componente di *Back-end* dell’Ente Creditore richiedente per mezzo della primitiva ***paaInviaEsitoStorno***;
 
-6) la componente di *Back-end* dell’Ente Creditore conferma al NodoSPC
-   la corretta ricezione del messaggio ER;
+6) la componente di *Back-end* dell’Ente Creditore conferma al NodoSPC la corretta ricezione del messaggio ER;
 
-7) il NodoSPC conferma alla componente di *Back-end* del PSP il corretto
-   invio del messaggio ER;
+7) il NodoSPC conferma alla componente di *Back-end* del PSP il corretto invio del messaggio ER;
 
-8) la componente di *Back-end* dell'Ente Creditore inoltra l'esito al
-   proprio *Front-office*;
+8) la componente di *Back-end* dell'Ente Creditore inoltra l'esito al proprio *Front-office*;
 
-9) l'utilizzatore finale, attraverso le funzioni di *Front-office*,
-   verifica l'esito della richiesta di storno.
+9) l'utilizzatore finale, attraverso le funzioni di *Front-office*, verifica l'esito della richiesta di storno.
 
 |PlantUML diagram|
 
-\ **Figura 31 - *Sequence diagram* del processo di Storno di un
-pagamento**
+\ **Figura 31 - *Sequence diagram* del processo di Storno di un pagamento**
 
-Il NodoSPC effettua unicamente un controllo di correttezza sintattica
-degli oggetti XML scambiato; nel caso della primitiva
-***nodoInviaRichiestaStorno***, viene verificato che la RPT oggetto
-della richiesta di storno sia stata accettata dal NodoSPC e dal PSP,
-altrimenti restituisce un errore specifico.
+Il NodoSPC effettua unicamente un controllo di correttezza sintattica degli oggetti XML scambiato; nel caso della primitiva ***nodoInviaRichiestaStorno***, viene verificato che la RPT oggetto della richiesta di storno sia stata accettata dal NodoSPC e dal PSP, altrimenti restituisce un errore specifico.
 
 Processo di riconciliazione dei pagamenti eseguiti
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Secondo quanto previsto dalle Linee guida e dal suo Allegato A
-"Specifiche attuative dei codici identificativi di versamento,
-riversamento e rendicontazione", il PSP che riceve l’ordine dal proprio
-cliente può regolare contabilmente l’operazione in modalità singola o in
-modalità cumulativa.
+Secondo quanto previsto dalle Linee guida e dal suo Allegato A "Specifiche attuative dei codici identificativi di versamento, riversamento e rendicontazione", il PSP che riceve l’ordine dal proprio cliente può regolare contabilmente l’operazione in modalità singola o in modalità cumulativa.
 
-In questo paragrafo sarà illustrato il *workflow* del processo di
-riconciliazione da parte dell'Ente Creditore riferito ai pagamenti che
-il PSP riversa in modalità cumulativa.
+In questo paragrafo sarà illustrato il *workflow* del processo di riconciliazione da parte dell'Ente Creditore riferito ai pagamenti che il PSP riversa in modalità cumulativa.
 
 |PlantUML diagram|
 
 \ **Figura 32 – *Sequence diagram* del processo di riconciliazione dei
 pagamenti**
 
-Dall'analisi del *Sequence diagram* del processo di riconciliazione dei
-pagamenti riportato in Figura 32, si evidenziano i seguenti
-passi:
+Dall'analisi del *Sequence diagram* del processo di riconciliazione dei pagamenti riportato in Figura 32, si evidenziano i seguenti passi:
 
-1) al termine del proprio ciclo contabile, la componente di *Back-end*
-   del PSP genera il flusso di rendicontazione secondo gli standard
-   previsti;
+1) al termine del proprio ciclo contabile, la componente di *Back-end* del PSP genera il flusso di rendicontazione secondo gli standard previsti;
 
-2) la componente di *Back-end* o altra struttura del PSP provvede ad
-   inviare, alla Banca Tesoriera dell'Ente Creditore, il SEPA Credit
-   Transfer (SCT) contenente l'indicazione del flusso di rendicontazione
-   generato al passo precedente;
+2) la componente di *Back-end* o altra struttura del PSP provvede ad inviare, alla Banca Tesoriera dell'Ente Creditore, il SEPA Credit Transfer (SCT) contenente l'indicazione del flusso di rendicontazione generato al passo precedente;
 
-3) la componente di *Back-end* del PSP invia al NodoSPC il flusso di
-   rendicontazione creato in precedenza tramite la primitiva
-   ***nodoInviaFlussoRendicontazione***;
+3) la componente di *Back-end* del PSP invia al NodoSPC il flusso di rendicontazione creato in precedenza tramite la primitiva ***nodoInviaFlussoRendicontazione***;
 
-4) se l'invio del flusso è valido, il NodoSPC memorizza il flusso
-   ricevuto in un’apposita base dati che ha come chiavi quelle che
-   identificano il flusso stesso e che ne consentono la ricerca;
+4) se l'invio del flusso è valido, il NodoSPC memorizza il flusso ricevuto in un’apposita base dati che ha come chiavi quelle che identificano il flusso stesso e che ne consentono la ricerca;
 
 5) il NodoSPC invia la *response* alla componente di *Back-end* del PSP:
 
-L’invio del flusso di Rendicontazione avviene in modalità *pull*: è cioè
-compito dell'Ente Creditore prelevare le informazioni relative ai flussi
-di propria competenza memorizzati sulla piattaforma. Di seguito il
-flusso prosegue su iniziativa dell'Ente Creditore:
+L’invio del flusso di Rendicontazione avviene in modalità *pull*: è cioè compito dell'Ente Creditore prelevare le informazioni relative ai flussi di propria competenza memorizzati sulla piattaforma. Di seguito il flusso prosegue su iniziativa dell'Ente Creditore:
 
-1) la componente di *Back-end* dell’Ente Creditore richiede al Nodo SPC
-   l'elenco dei flussi di propria competenza tramite la primitiva
-   ***nodoChiediElencoFlussiRendicontazione***;
+1) la componente di *Back-end* dell’Ente Creditore richiede al Nodo SPC l'elenco dei flussi di propria competenza tramite la primitiva ***nodoChiediElencoFlussiRendicontazione***;
 
-2) se la richiesta è valida, il Nodo SPC invia nella *response*
-   *l'elenco completo* dei flussi dell'ente presenti sulla piattaforma
-   al momento della richiesta, indipendentemente dal fatto che uno o più
-   flussi siano già stati consegnati all’Ente Creditore;
+2) se la richiesta è valida, il Nodo SPC invia nella *response* *l'elenco completo* dei flussi dell'ente presenti sulla piattaforma al momento della richiesta, indipendentemente dal fatto che uno o più flussi siano già stati consegnati all’Ente Creditore;
 
-3) la componente di *Back-end* dell’Ente Creditore determina
-   l'identificativo flusso da ottenere [6]_ e lo richiede al NodoSPC per
-   mezzo della primitiva ***nodoChiedFlussoRendicontazione***;
+3) la componente di *Back-end* dell’Ente Creditore determina l'identificativo flusso da ottenere [6]_ e lo richiede al NodoSPC per mezzo della primitiva ***nodoChiedFlussoRendicontazione***;
 
 in funzione della configurazione dell'Ente Creditore:
 
 ***Acquisizione flusso via SOAP***
 
-1) se la richiesta è valida, il NodoSPC invia alla componente di
-   *Back-end* dell’Ente Creditore, come allegato alla *response*, il
-   flusso richiesto (il *workflow* prosegue al passo 13);
+1) se la richiesta è valida, il NodoSPC invia alla componente di *Back-end* dell’Ente Creditore, come allegato alla *response*, il flusso richiesto (il *workflow* prosegue al passo 13);
 
 ***Acquisizione flusso via SFTP***
 
-1) se la richiesta è valida, il NodoSPC invia alla componente di
-   *Back-end* dell’Ente Creditore una *response* positiva senza flusso
-   allegato;
+1) se la richiesta è valida, il NodoSPC invia alla componente di *Back-end* dell’Ente Creditore una *response* positiva senza flusso allegato;
 
-2) il NodoSPC esegue lo *upload* del flusso richiesto nell'apposita
-   cartella dell'Ente Creditore definita per il servizio di file
-   transfer sicuro;
+2) il NodoSPC esegue lo *upload* del flusso richiesto nell'apposita cartella dell'Ente Creditore definita per il servizio di file transfer sicuro;
 
-3) la componente di *Back-end* dell’Ente Creditore esegue il *download*
-   del flusso dalla propria cartella definita per il servizio di file
-   transfer sicuro;
+3) la componente di *Back-end* dell’Ente Creditore esegue il *download* del flusso dalla propria cartella definita per il servizio di file transfer sicuro;
 
 ***Riconciliazione***
 
-1) la componente di *Back-end* dell’Ente Creditore invia alla propria
-   componente di *Back-office* il flusso ottenuto dal NodoSPC;
+1) la componente di *Back-end* dell’Ente Creditore invia alla propria componente di *Back-office* il flusso ottenuto dal NodoSPC;
 
-2) la componente di *Back-office* dell’Ente Creditore riceve dalla
-   propria Banca Tesoriera, tramite OIL oppure OPI o altro supporto
-   informatico, un flusso contenente i movimentai acquisiti (ad esempio:
-   Giornale di Cassa);
+2) la componente di *Back-office* dell’Ente Creditore riceve dalla propria Banca Tesoriera, tramite OIL oppure OPI o altro supporto informatico, un flusso contenente i movimentai acquisiti (ad esempio: Giornale di Cassa);
 
-3) sulla base dell'identificativo flusso presente nel supporto
-   informatico ricevuto dalla Banca Tesoriera, la componente di
-   *Back-office* dell’Ente Creditore effettua la riconciliazione.
+3) sulla base dell'identificativo flusso presente nel supporto informatico ricevuto dalla Banca Tesoriera, la componente di *Back-office* dell’Ente Creditore effettua la riconciliazione.
 
 Processo di avvisatura digitale *push* (su iniziativa dell'Ente Creditore)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

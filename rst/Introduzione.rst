@@ -1,6 +1,3 @@
-.. figure:: media/image1.png
-   :width: 100%
-
 Definizioni e Acronimi
 ======================
 
@@ -145,14 +142,10 @@ Definizioni e Acronimi
 +-----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Specifiche di interconnessione
+-------------------------------
 
-La presente sezione descrive le interfacce di cooperazione applicativa
-del software che implementa i servizi del Nodo dei Pagamenti SPC. I
-servizi sono realizzati tramite *Web service* utilizzati da un lato tra
-Enti Creditori aderenti e Nodo dei Pagamenti-SPC, e dall’altro tra Nodo
-dei Pagamenti-SPC e prestatori dei servizi di pagamento. L’insieme delle
-primitive offerte da questi *Web service* consentono di coprire i
-modelli di pagamento forniti dal Nodo dei Pagamenti-SPC:
+La presente sezione descrive le interfacce di cooperazione applicativa del software che implementa i servizi del Nodo dei Pagamenti SPC. I servizi sono realizzati tramite *Web service* utilizzati da un lato tra Enti Creditori aderenti e Nodo dei Pagamenti-SPC, e dall’altro tra Nodo dei Pagamenti-SPC e prestatori dei servizi di pagamento. L’insieme delle
+primitive offerte da questi *Web service* consentono di coprire i modelli di pagamento forniti dal Nodo dei Pagamenti-SPC:
 
 +-------------+-------------------------------------------------------------------------------------------------+
 | Modello 1   | Pagamento attivato presso l’Ente Creditore con re indirizzamento on-line                        |
@@ -164,65 +157,31 @@ modelli di pagamento forniti dal Nodo dei Pagamenti-SPC:
 | Modello 4   | Pagamento spontaneo attivato presso il PSP                                                      |
 +-------------+-------------------------------------------------------------------------------------------------+
 
-Per la piena comprensione dei modelli, si tenga presente che lo scambio
-di messaggi può avvenire tramite la mediazione di soggetti intermediari,
-che gestiscono i sistemi software di interconnessione e si interfacciano
-al Nodo. I parametri di indirizzamento, necessari al corretto
-instradamento del messaggio dal mittente al destinatario, devono
-pertanto tenere conto di tali soggetti. A tal proposito, nel seguito si
-utilizza la seguente nomenclatura tecnica:
+Per la piena comprensione dei modelli, si tenga presente che lo scambio di messaggi può avvenire tramite la mediazione di soggetti intermediari, che gestiscono i sistemi software di interconnessione e si interfacciano al Nodo. I parametri di indirizzamento, necessari al corretto instradamento del messaggio dal mittente al destinatario, devono pertanto tenere conto di tali soggetti. A tal proposito, nel seguito si utilizza la seguente nomenclatura tecnica:
 
--  **IntermediarioPA**, soggetto che opera come intermediario per un
-   Ente Creditore. Qualora l’Ente Creditore non si avvalga di un
-   intermediario, rappresenta l’Ente Creditore stesso;
+-  **IntermediarioPA**, soggetto che opera come intermediario per un Ente Creditore. Qualora l’Ente Creditore non si avvalga di un intermediario, rappresenta l’Ente Creditore stesso;
 
--  **Back-end EC** o **StazioneIntermediarioPA**, sistema software
-   gestito da un IntermediarioPA, che si interfaccia direttamente col
-   Nodo dei Pagamenti-SPC tramite Porta di Dominio;
+-  **Back-end EC** o **StazioneIntermediarioPA**, sistema software gestito da un IntermediarioPA, che si interfaccia direttamente col Nodo dei Pagamenti-SPC tramite Porta di Dominio;
 
--  **IntermediarioPSP**, soggetto che opera come intermediario per un
-   PSP. Qualora il PSP non si avvalga di un intermediario, rappresenta
-   il PSP stesso;
+-  **IntermediarioPSP**, soggetto che opera come intermediario per un PSP. Qualora il PSP non si avvalga di un intermediario, rappresenta il PSP stesso;
 
--  **Back-end PSP** o **Canale**, sistema software gestito da un
-   IntermediarioPSP, che si interfaccia direttamente al Nodo dei
-   Pagamenti-SPC con le modalità previste.
+-  **Back-end PSP** o **Canale**, sistema software gestito da un IntermediarioPSP, che si interfaccia direttamente al Nodo dei Pagamenti-SPC con le modalità previste.
 
-Sulla base delle precedenti definizioni, si individuano le seguenti
-relazioni tra gli identificativi che rappresentano tali
-soggetti/sistemi:
+Sulla base delle precedenti definizioni, si individuano le seguenti relazioni tra gli identificativi che rappresentano tali soggetti/sistemi:
 
--  un identificativoStazioneIntermediarioPA appartiene ad un solo
-   IntermediarioPA e di conseguenza deve essere univoco rispetto a
-   identificativoIntermediarioPA.
+-  un identificativoStazioneIntermediarioPA appartiene ad un solo IntermediarioPA e di conseguenza deve essere univoco rispetto a identificativoIntermediarioPA.
 
--  un identificativoCanale appartiene ad un solo IntermediarioPSP e di
-   conseguenza deve essere univoco rispetto a
-   identificativoIntermediarioPSP.
+-  un identificativoCanale appartiene ad un solo IntermediarioPSP e di conseguenza deve essere univoco rispetto a identificativoIntermediarioPSP.
 
-Tutte le primitive di interazione sono realizzate come operazioni SOAP,
-utilizzando la modalità sincrona del paradigma SOAP e il protocollo http
-o *https* per il trasporto.
+Tutte le primitive di interazione sono realizzate come operazioni SOAP, utilizzando la modalità sincrona del paradigma SOAP e il protocollo http o *https* per il trasporto.
 
-Il diagramma di Figura 22 a pagina 114 offre una visione complessiva
-delle operazioni trattate dal Nodo dei Pagamenti-SPC e dai soggetti
-collegati: in particolare la freccia parte da chi invoca l’operazione e
-raggiunge chi espone il servizio. Come si può osservare tutti gli attori
-rivestono sia il ruolo di *client* che di *server*.
+Il diagramma di Figura 22 a pagina 114 offre una visione complessiva delle operazioni trattate dal Nodo dei Pagamenti-SPC e dai soggetti collegati: in particolare la freccia parte da chi invoca l’operazione e raggiunge chi espone il servizio. Come si può osservare tutti gli attori rivestono sia il ruolo di *client* che di *server*.
 
-Le operazioni principali sono rappresentate nella parte sinistra della
-figura: tali operazioni sono strettamente necessarie allo scambio dei
-flussi relativi ai diversi modelli di pagamento ed alle funzionalità di
-avvisatura digitale. Le operazioni rappresentate nella parte destra
-della figura riguardano invece operazioni accessorie; alcune
-particolarmente utili per acquisire lo stato di avanzamento dei flussi
-di pagamento ed anche per ripristinare particolari situazioni di errore
-che si potrebbero verificare (tipicamente la perdita di una *response*)
-e che potrebbero interrompere il corretto svolgimento del pagamento.
+Le operazioni principali sono rappresentate nella parte sinistra della figura: tali operazioni sono strettamente necessarie allo scambio dei flussi relativi ai diversi modelli di pagamento ed alle funzionalità di avvisatura digitale. Le operazioni rappresentate nella parte destra della figura riguardano invece operazioni accessorie; alcune
+particolarmente utili per acquisire lo stato di avanzamento dei flussi di pagamento ed anche per ripristinare particolari situazioni di errore che si potrebbero verificare (tipicamente la perdita di una *response*) e che potrebbero interrompere il corretto svolgimento del pagamento.
 
 .. figure:: media/image2.png
 
 .. figure:: media/image3.png
 
-\ **Figura 22 - Diagramma complessivo delle operazioni gestite dal
-NodoSPC**
+\ **Figura 22 - Diagramma complessivo delle operazioni gestite dal NodoSPC**
