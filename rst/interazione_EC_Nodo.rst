@@ -4779,8 +4779,7 @@ Parametri di output
 in caso di errore: ***faultBean*** emesso da ***PSP*** (faultBean.id =<
 identificativoPSP >).
 
-Di seguito valori da codificare negli elementi faultBean.faultCode e
-faultBean.faultString nel caso di:
+Di seguito valori da codificare negli elementi faultBean.faultCode e faultBean.faultString nel caso di:
 
 A. Nessuna RT pronta per essere prelevata:
 
@@ -4797,16 +4796,10 @@ Fault String: *Identificativo richiedente non valido*
 Pagamenti in attesa e richiesta di generazione della RPT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Con riferimento a quanto indicato al Paragrafo Pagamenti Attivati presoo il PSP per la gestione dei
-meccanismi di richiesta di generazione della RPT per i pagamenti in
-attesa, il Nodo dei Pagamenti-SPC rende disponibili i metodi SOAP
-descritti nel corso del paragrafo e riportati in Figura 58:
+Con riferimento a quanto indicato al Paragrafo Pagamenti Attivati presoo il PSP per la gestione dei meccanismi di richiesta di generazione della RPT per i pagamenti in
+attesa, il Nodo dei Pagamenti-SPC rende disponibili i metodi SOAP descritti nel corso del paragrafo e riportati in Figura 58:
 
-a. *nodoAllegaRPT*, con la quale viene richiesta dal PSP al Nodo dei
-   Pagamenti-SPC l'inoltro all’Ente Creditore aderente della richiesta
-   di generazione della RPT. L'esito della richiesta, generato dall’Ente
-   Creditore, è restituito al PSP da parte del Nodo dei Pagamenti-SPC e,
-   se positivo, contiene la RPT predisposta dall'EC;
+a. *nodoAllegaRPT*, con la quale viene richiesta dal PSP al Nodo dei Pagamenti-SPC l'inoltro all’Ente Creditore aderente della richiesta di generazione della RPT. L'esito della richiesta, generato dall’Ente Creditore, è restituito al PSP da parte del Nodo dei Pagamenti-SPC e, se positivo, contiene la RPT predisposta dall'EC;
 
 b. *nodoVerificaRPT*, con la quale viene richiesta dal PSP al Nodo dei
    Pagamenti-SPC la verifica dell’esistenza e dello stato del pagamento
@@ -7606,102 +7599,47 @@ Lo schema XSD di tale oggetto è disponibile con il file
 
 **ACK\_PagamentiTelematici\_<versione>.xsd.**
 
-.. [1]
-    in alcuni documenti degli Enti Creditori indicato anche come CRS.
+.. rubric:: Note
 
-.. [2]
-    I dati per indicare il PSP fittizio da inserire nella RPT sono
-   pubblicati sul sito dell'Agenzia nell'Appendice 3 alle SANP.
+.. [1] in alcuni documenti degli Enti Creditori indicato anche come CRS.
 
-.. [3]
-   Vedi anche Nota 17.
+.. [2] I dati per indicare il PSP fittizio da inserire nella RPT sono pubblicati sul sito dell'Agenzia nell'Appendice 3 alle SANP.
 
-.. [4]
-   Questo URL contiene l’identificativo di sessione di cui sopra e il
-   dato idCarrello che il Portale EC utilizzerà per riconoscere il
-   carrello di RT associato.
+.. [3] Vedi anche Nota 17.
 
-.. [5]
-   Vedi anche Nota 17.
+.. [4] Questo URL contiene l’identificativo di sessione di cui sopra e il dato idCarrello che il Portale EC utilizzerà per riconoscere il carrello di RT associato.
 
-.. [6]
-   Il Nodo dei Pagamenti-SPC non tiene traccia dei singoli flussi di
-   rendicontazione richiesti dall’Ente Creditore con la primitiva
-   ***nodoChiedFlussoRendicontazione***, pertanto è compito di
-   quest'ultimo richiedere i flussi di proprio interesse.
+.. [5] Vedi anche Nota 17.
 
-.. [7]
-   Si ricorda che detto data base è popolato con le informazioni inviate
-   con la notifica di iscrizione al servizio da parte del PSP, tra cui
-   questi dati sono presenti (cfr. Tabella 27 a pagina 19).
+.. [6] Il Nodo dei Pagamenti-SPC non tiene traccia dei singoli flussi di rendicontazione richiesti dall’Ente Creditore con la primitiva ***nodoChiedFlussoRendicontazione***, pertanto è compito di quest'ultimo richiedere i flussi di proprio interesse.
 
-.. [8]
-   Elementi tipoIdentificativoUnivoco e identificativoUnivocoPagatore.
+.. [7] Si ricorda che detto data base è popolato con le informazioni inviate con la notifica di iscrizione al servizio da parte del PSP, tra cui questi dati sono presenti (cfr. Tabella 27 a pagina 19).
 
-.. [9]
-   Nei casi in cui "Riuso IUV" è valorizzato a SI, è possibile eseguire
-   una *nodoInviaRPT* con lo stesso IUV. In questo caso il campo “stato”
-   relativo alla RPT, restituisce lo stato dell’ultima RPT ricevuta dal
-   NodoSPC con i parametri chiave forniti; il dato storicoLista fornisce
-   la storia di tutti i messaggi inviati.
+.. [8] Elementi tipoIdentificativoUnivoco e identificativoUnivocoPagatore.
 
-.. [10]
-   L’Ente Creditore genera una RPT, identificata dall'elemento
-   identificativoUnivocoVersamento e dall'elemento
-   codiceContestoPagamento (CCP) generato dal PSP, e la registra nei
-   propri archivi. In tal modo, l’Ente Creditore è in grado anche di
-   verificare l'univocità, in particolare per la componente CCP.
+.. [9] Nei casi in cui "Riuso IUV" è valorizzato a SI, è possibile eseguire una *nodoInviaRPT* con lo stesso IUV. In questo caso il campo “stato” relativo alla RPT, restituisce lo stato dell’ultima RPT ricevuta dal NodoSPC con i parametri chiave forniti; il dato storicoLista fornisce la storia di tutti i messaggi inviati.
 
-.. [11]
-   Si ricorda che un singolo avviso potrebbe dare luogo all'inoltro di
-   più avvisi digitali in funzione delle sottoscrizioni effettuate
-   dall'utilizzatore finale sia presso le PA o presso più PSP.
+.. [10] L’Ente Creditore genera una RPT, identificata dall'elemento identificativoUnivocoVersamento e dall'elemento codiceContestoPagamento (CCP) generato dal PSP, e la registra nei propri archivi. In tal modo, l’Ente Creditore è in grado anche di verificare l'univocità, in particolare per la componente CCP.
 
-.. [12]
-   In modo da gestire i casi in cui l’invio giornaliero superi la
-   massima numerosità consentita, al momento prevista in 100 mila avvisi
-   digitali.
+.. [11] Si ricorda che un singolo avviso potrebbe dare luogo all'inoltro di più avvisi digitali in funzione delle sottoscrizioni effettuate dall'utilizzatore finale sia presso le PA o presso più PSP.
 
-.. [13]
-   Si vedano i parametri delle primitive ***nodoAllegaRPT***,
-   ***nodoVerificaRPT*** e ***nodoAttivaRPT*** nei successivi paragrafi.
+.. [12] In modo da gestire i casi in cui l’invio giornaliero superi la massima numerosità consentita, al momento prevista in 100 mila avvisi digitali.
 
-.. [14]
-   Ad esempio: importo variato, interessi, ecc..
+.. [13] Si vedano i parametri delle primitive ***nodoAllegaRPT***, ***nodoVerificaRPT*** e ***nodoAttivaRPT*** nei successivi paragrafi.
 
-.. [15]
-   dato codiceEsitoPagamento impostato a 3 o 4.
+.. [14] Ad esempio: importo variato, interessi, ecc..
 
-.. [16]
-   Con la primitiva in questione è possibile inviare una sola RPT alla
-   volta, pertanto la lista di RPT è costituita da un unico elemento. Il
-   parametro listaRPT è rimasto per garantire la retro compatibilità con
-   le versioni precedenti.
+.. [15] dato codiceEsitoPagamento impostato a 3 o 4.
 
-   Per inviare una lista di RPT (carrello) deve essere usata la la
-   primitiva pspInviaCarrelloRPT (vedi paragrafo successivo).
+.. [16] Con la primitiva in questione è possibile inviare una sola RPT alla volta, pertanto la lista di RPT è costituita da un unico elemento. Il parametro listaRPT è rimasto per garantire la retro compatibilità con le versioni precedenti. Per inviare una lista di RPT (carrello) deve essere usata la la primitiva pspInviaCarrelloRPT (vedi paragrafo successivo).
 
-.. [17]
-    Poiché tali parametri possono essere diversi da PSP a PSP, non è
-   possibile darne una modellazione dettagliata valida per tutti i casi.
-   Si preferisce pertanto rappresentarli come stringa di formato
-   concordato tra NodoSPC e PSP.
+.. [17] Poiché tali parametri possono essere diversi da PSP a PSP, non è possibile darne una modellazione dettagliata valida per tutti i casi. Si preferisce pertanto rappresentarli come stringa di formato concordato tra NodoSPC e PSP.
 
-.. [18]
-   indica la modalità di firma applicata alla RPT. Si precisa che il
-   parametro è sempre vuoto in quanto la possibilità di firmare le RPT è
-   stata rimossa a partire dalla versione 1.5 e mantenuto per garantire
-   la retro compatibilità con le versioni precedenti
+.. [18] indica la modalità di firma applicata alla RPT. Si precisa che il parametro è sempre vuoto in quanto la possibilità di firmare le RPT è stata rimossa a partire dalla versione 1.5 e mantenuto per garantire la retro compatibilità con le versioni precedenti
 
-.. [19]
-   Per alcuni PSP può contenere, ad esempio, la stringa
-   “idBruciatura=<codiceBruciatura>”
+.. [19] Per alcuni PSP può contenere, ad esempio, la stringa “idBruciatura=<codiceBruciatura>”
 
-.. [20]
-   Per fornire un’indicazione immediata dello stato di avanzamento
-   relativo dell’operazione, l’inizio della stringa può essere
-   valorizzato con: *“(numero passo attuale – numero totale passi del
-   ramo del processo):”*
+.. [20] Per fornire un’indicazione immediata dello stato di avanzamento relativo dell’operazione, l’inizio della stringa può essere valorizzato con: *“(numero passo attuale – numero totale passi del ramo del processo):”*
 
    A solo titolo esemplificativo, ma non esaustivo, si elencano alcune
    possibili descrizioni dello stato di avanzamento:
@@ -7712,30 +7650,14 @@ Lo schema XSD di tale oggetto è disponibile con il file
 
        (1-1): SCARTATO\_[consegnato ACK negativo da FESP PSP]
 
-.. [21]
-   Viene applicata la regular expression [a-zA-Z0-9\\-\_].
+.. [21] Viene applicata la regular expression [a-zA-Z0-9\\-\_].
 
-.. [22]
-    Per quanto riguarda URLDONE ed URLMS, si tenga presente che la
-   componente *Initiating Party*, nel predisporre il messaggio HTTP di
-   esisto del pagamento, dovrà concatenare i dati identificativi
-   dell’ordine al termine di queste due stringhe, secondo il formato
-   indicato al successivo paragrafo Messaggio HTTP-redirect di esito pagamento da Initiating Party.
+.. [22] Per quanto riguarda URLDONE ed URLMS, si tenga presente che la componente *Initiating Party*, nel predisporre il messaggio HTTP di esisto del pagamento, dovrà concatenare i dati identificativi dell’ordine al termine di queste due stringhe, secondo il formato indicato al successivo paragrafo Messaggio HTTP-redirect di esito pagamento da Initiating Party.
 
-.. [23]
-    La componente “Wrapper MyBank” che riceve il messaggio ricalcola il
-   MAC utilizzando la stringa segreta “chiave B” in suo possesso per
-   verificare che esso coincida con quello inserito nel messaggio
-   pervenuto.
+.. [23] La componente “Wrapper MyBank” che riceve il messaggio ricalcola il MAC utilizzando la stringa segreta “chiave B” in suo possesso per verificare che esso coincida con quello inserito nel messaggio pervenuto.
 
-.. [24]
-   Il terminale può essere un ATM, quello dell'operatore del PSP ovvero
-   quell'utilizzatore finale che utilizza le funzioni di home banking
-   messe disposizione dal PSP.
+.. [24] Il terminale può essere un ATM, quello dell'operatore del PSP ovvero quell'utilizzatore finale che utilizza le funzioni di home banking messe disposizione dal PSP.
 
-.. |LAVORO SILVIA:silvia:AGID SLIDE:IDENTITY:CARTA INTESTATA:EXE:AGID\_logo\_carta\_intestata-02.png| image:: media/image1.png
-   :width: 5.90551in
-   :height: 1.30277in
 .. |PlantUML diagram| image:: media/image2.png
    :width: 3.32677in
    :height: 5.23365in
