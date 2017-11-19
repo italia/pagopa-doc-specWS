@@ -1,4 +1,4 @@
-Specifiche Implementazione Web Services (BOZZA)
+Specifiche Implementazione Web Services
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. toctree::
